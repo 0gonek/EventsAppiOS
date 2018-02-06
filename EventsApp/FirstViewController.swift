@@ -17,6 +17,8 @@ class FirstViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        var kek : Int = 0;
+        kek += 5;
         // Dispose of any resources that can be recreated.
     }
 
