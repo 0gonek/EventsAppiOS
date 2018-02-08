@@ -8,9 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		39D450E06205C5C73B6749AF /* libPods-EventsApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 55F69A135FFF2D1436A51510 /* libPods-EventsApp.a */; };
+		8A124A27202B54B8002E9800 /* GroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A124A26202B54B8002E9800 /* GroupsViewController.swift */; };
 		8A193B6C202A62BE00E6E276 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A193B6B202A62BE00E6E276 /* AppDelegate.swift */; };
-		8A193B6E202A62BE00E6E276 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A193B6D202A62BE00E6E276 /* FirstViewController.swift */; };
-		8A193B70202A62BE00E6E276 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A193B6F202A62BE00E6E276 /* SecondViewController.swift */; };
+		8A193B6E202A62BE00E6E276 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A193B6D202A62BE00E6E276 /* MapViewController.swift */; };
+		8A193B70202A62BE00E6E276 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A193B6F202A62BE00E6E276 /* ProfileViewController.swift */; };
 		8A193B73202A62BE00E6E276 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A193B71202A62BE00E6E276 /* Main.storyboard */; };
 		8A193B75202A62BE00E6E276 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A193B74202A62BE00E6E276 /* Assets.xcassets */; };
 		8A193B78202A62BE00E6E276 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A193B76202A62BE00E6E276 /* LaunchScreen.storyboard */; };
@@ -22,10 +23,11 @@
 		12CE2E8CC1D4D03F89DEB684 /* Pods-EventsApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EventsApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-EventsApp/Pods-EventsApp.release.xcconfig"; sourceTree = "<group>"; };
 		55F69A135FFF2D1436A51510 /* libPods-EventsApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EventsApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D90FB167FBD18EB8E0070BB /* Pods-EventsApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EventsApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EventsApp/Pods-EventsApp.debug.xcconfig"; sourceTree = "<group>"; };
+		8A124A26202B54B8002E9800 /* GroupsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsViewController.swift; sourceTree = "<group>"; };
 		8A193B68202A62BD00E6E276 /* EventsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EventsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A193B6B202A62BE00E6E276 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8A193B6D202A62BE00E6E276 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		8A193B6F202A62BE00E6E276 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		8A193B6D202A62BE00E6E276 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		8A193B6F202A62BE00E6E276 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		8A193B72202A62BE00E6E276 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8A193B74202A62BE00E6E276 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8A193B77202A62BE00E6E276 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -70,14 +72,15 @@
 			children = (
 				8A193B7F202A647700E6E276 /* EventsApp.entitlements */,
 				8A193B6B202A62BE00E6E276 /* AppDelegate.swift */,
-				8A193B6D202A62BE00E6E276 /* FirstViewController.swift */,
+				8A193B6D202A62BE00E6E276 /* MapViewController.swift */,
 				8A52613A202A84AB00A0AA2F /* Podfile */,
-				8A193B6F202A62BE00E6E276 /* SecondViewController.swift */,
+				8A193B6F202A62BE00E6E276 /* ProfileViewController.swift */,
 				8A193B71202A62BE00E6E276 /* Main.storyboard */,
 				8A193B83202A6C0B00E6E276 /* Settings.bundle */,
 				8A193B74202A62BE00E6E276 /* Assets.xcassets */,
 				8A193B76202A62BE00E6E276 /* LaunchScreen.storyboard */,
 				8A193B79202A62BE00E6E276 /* Info.plist */,
+				8A124A26202B54B8002E9800 /* GroupsViewController.swift */,
 			);
 			path = EventsApp;
 			sourceTree = "<group>";
@@ -240,9 +243,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A193B70202A62BE00E6E276 /* SecondViewController.swift in Sources */,
+				8A124A27202B54B8002E9800 /* GroupsViewController.swift in Sources */,
+				8A193B70202A62BE00E6E276 /* ProfileViewController.swift in Sources */,
 				8A193B6C202A62BE00E6E276 /* AppDelegate.swift in Sources */,
-				8A193B6E202A62BE00E6E276 /* FirstViewController.swift in Sources */,
+				8A193B6E202A62BE00E6E276 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

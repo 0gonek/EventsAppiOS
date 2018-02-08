@@ -1,5 +1,5 @@
 //
-//  FirstViewController.swift
+//  SecondViewController.swift
 //  EventsApp
 //
 //  Created by Alexey on 07.02.2018.
@@ -7,12 +7,13 @@
 //
 
 import UIKit
-import GoogleMaps
 
-class FirstViewController: UIViewController {
+class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+            
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
 
