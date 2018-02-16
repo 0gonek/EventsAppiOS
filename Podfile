@@ -5,4 +5,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 target 'EventsApp' do
 pod 'GoogleMaps'
 pod 'GooglePlaces'
+pod 'SwiftyVK'
+pod 'Just'
+  use_frameworks!
 end

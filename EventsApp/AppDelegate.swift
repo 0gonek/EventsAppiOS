@@ -9,6 +9,9 @@
 import UIKit
 import GoogleMaps
 import GooglePlaces
+import SwiftyVK
+
+var vkDelegateReference : SwiftyVKDelegate?
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,6 +23,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         GMSServices.provideAPIKey("AIzaSyBu7ecpHo8t79Nr_mtHNA--jLlY4aFIhJY")
         GMSPlacesClient.provideAPIKey("AIzaSyBu7ecpHo8t79Nr_mtHNA--jLlY4aFIhJY")
+        vkDelegateReference = VKDelegate()
+        return true
+    }
+    
+    @available(iOS 9.0, *)
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        let app = options[.sourceApplication] as? String
+        VK.handle(url: url, sourceApplication: app)
+        return true
+    }
+    
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        VK.handle(url: url, sourceApplication: sourceApplication)
         return true
     }
 

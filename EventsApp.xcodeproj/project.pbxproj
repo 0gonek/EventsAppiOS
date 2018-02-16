@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		39D450E06205C5C73B6749AF /* libPods-EventsApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 55F69A135FFF2D1436A51510 /* libPods-EventsApp.a */; };
 		8A124A27202B54B8002E9800 /* GroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A124A26202B54B8002E9800 /* GroupsViewController.swift */; };
 		8A193B6C202A62BE00E6E276 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A193B6B202A62BE00E6E276 /* AppDelegate.swift */; };
 		8A193B6E202A62BE00E6E276 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A193B6D202A62BE00E6E276 /* MapViewController.swift */; };
@@ -16,12 +15,15 @@
 		8A193B75202A62BE00E6E276 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A193B74202A62BE00E6E276 /* Assets.xcassets */; };
 		8A193B78202A62BE00E6E276 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A193B76202A62BE00E6E276 /* LaunchScreen.storyboard */; };
 		8A193B84202A6C0B00E6E276 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8A193B83202A6C0B00E6E276 /* Settings.bundle */; };
+		8A3AD5192036316300BAFB9D /* VKDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3AD5182036316300BAFB9D /* VKDelegate.swift */; };
+		8A3AD51B20364D3200BAFB9D /* APIWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3AD51A20364D3200BAFB9D /* APIWorker.swift */; };
 		8A52613B202A84AB00A0AA2F /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 8A52613A202A84AB00A0AA2F /* Podfile */; };
+		FD9961C3C15F38A890BC0C9E /* Pods_EventsApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2050D2A1E945736434EAC7CF /* Pods_EventsApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		12CE2E8CC1D4D03F89DEB684 /* Pods-EventsApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EventsApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-EventsApp/Pods-EventsApp.release.xcconfig"; sourceTree = "<group>"; };
-		55F69A135FFF2D1436A51510 /* libPods-EventsApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EventsApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2050D2A1E945736434EAC7CF /* Pods_EventsApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EventsApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D90FB167FBD18EB8E0070BB /* Pods-EventsApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EventsApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EventsApp/Pods-EventsApp.debug.xcconfig"; sourceTree = "<group>"; };
 		8A124A26202B54B8002E9800 /* GroupsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsViewController.swift; sourceTree = "<group>"; };
 		8A193B68202A62BD00E6E276 /* EventsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EventsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -34,6 +36,8 @@
 		8A193B79202A62BE00E6E276 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A193B7F202A647700E6E276 /* EventsApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EventsApp.entitlements; sourceTree = "<group>"; };
 		8A193B83202A6C0B00E6E276 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		8A3AD5182036316300BAFB9D /* VKDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKDelegate.swift; sourceTree = "<group>"; };
+		8A3AD51A20364D3200BAFB9D /* APIWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIWorker.swift; sourceTree = "<group>"; };
 		8A52613A202A84AB00A0AA2F /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 /* End PBXFileReference section */
 
@@ -42,7 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				39D450E06205C5C73B6749AF /* libPods-EventsApp.a in Frameworks */,
+				FD9961C3C15F38A890BC0C9E /* Pods_EventsApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,17 +74,16 @@
 		8A193B6A202A62BD00E6E276 /* EventsApp */ = {
 			isa = PBXGroup;
 			children = (
+				8A3AD5172036314300BAFB9D /* Services */,
+				8A3AD5162036310A00BAFB9D /* ViewControllers */,
 				8A193B7F202A647700E6E276 /* EventsApp.entitlements */,
 				8A193B6B202A62BE00E6E276 /* AppDelegate.swift */,
-				8A193B6D202A62BE00E6E276 /* MapViewController.swift */,
 				8A52613A202A84AB00A0AA2F /* Podfile */,
-				8A193B6F202A62BE00E6E276 /* ProfileViewController.swift */,
 				8A193B71202A62BE00E6E276 /* Main.storyboard */,
 				8A193B83202A6C0B00E6E276 /* Settings.bundle */,
 				8A193B74202A62BE00E6E276 /* Assets.xcassets */,
 				8A193B76202A62BE00E6E276 /* LaunchScreen.storyboard */,
 				8A193B79202A62BE00E6E276 /* Info.plist */,
-				8A124A26202B54B8002E9800 /* GroupsViewController.swift */,
 			);
 			path = EventsApp;
 			sourceTree = "<group>";
@@ -88,9 +91,28 @@
 		8A193B80202A647E00E6E276 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				55F69A135FFF2D1436A51510 /* libPods-EventsApp.a */,
+				2050D2A1E945736434EAC7CF /* Pods_EventsApp.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8A3AD5162036310A00BAFB9D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				8A193B6D202A62BE00E6E276 /* MapViewController.swift */,
+				8A193B6F202A62BE00E6E276 /* ProfileViewController.swift */,
+				8A124A26202B54B8002E9800 /* GroupsViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		8A3AD5172036314300BAFB9D /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				8A3AD5182036316300BAFB9D /* VKDelegate.swift */,
+				8A3AD51A20364D3200BAFB9D /* APIWorker.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		92C09C3AFCE09A302CD72341 /* Pods */ = {
@@ -210,11 +232,13 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-EventsApp/Pods-EventsApp-resources.sh",
 				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
 				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
+				"${PODS_ROOT}/SwiftyVK/Library/Resources/Bundles/SwiftyVK_resources_iOS.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SwiftyVK_resources_iOS.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -227,9 +251,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-EventsApp/Pods-EventsApp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Just/Just.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Just.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -245,7 +272,9 @@
 			files = (
 				8A124A27202B54B8002E9800 /* GroupsViewController.swift in Sources */,
 				8A193B70202A62BE00E6E276 /* ProfileViewController.swift in Sources */,
+				8A3AD5192036316300BAFB9D /* VKDelegate.swift in Sources */,
 				8A193B6C202A62BE00E6E276 /* AppDelegate.swift in Sources */,
+				8A3AD51B20364D3200BAFB9D /* APIWorker.swift in Sources */,
 				8A193B6E202A62BE00E6E276 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -390,7 +419,7 @@
 				INFOPLIST_FILE = EventsApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = HSE.CS.SE.EventsApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.EventsApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -408,7 +437,7 @@
 				INFOPLIST_FILE = EventsApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = HSE.CS.SE.EventsApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.EventsApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
