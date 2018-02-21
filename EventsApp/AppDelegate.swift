@@ -13,6 +13,8 @@ import SwiftyVK
 
 var vkDelegateReference : SwiftyVKDelegate?
 
+
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -24,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSServices.provideAPIKey("AIzaSyBu7ecpHo8t79Nr_mtHNA--jLlY4aFIhJY")
         GMSPlacesClient.provideAPIKey("AIzaSyBu7ecpHo8t79Nr_mtHNA--jLlY4aFIhJY")
         vkDelegateReference = VKDelegate()
+        VK.setUp(appId: "6219519", delegate: vkDelegateReference!)
         return true
     }
     

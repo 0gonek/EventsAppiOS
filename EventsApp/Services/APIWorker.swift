@@ -3,29 +3,17 @@ import SwiftyVK
 
 
 final class APIWorker {
-    
-    class func action(_ tag: Int) {
-        switch tag {
-        case 1:
-            authorize()
-        case 2:
-            logout()
-        default:
-            print("Unrecognized action!")
-        }
-    }
-    
-    class func authorize() {
+
+    class func authorize( success: @escaping ([String : String]) -> ())
+    {
         VK.sessions.default.logIn(
-            onSuccess: { info in
-                print("SwiftyVK: success authorize with", info)
-        },
+            onSuccess: success,
             onError: { error in
                 print("SwiftyVK: authorize failed with", error)
         }
         )
     }
-    
+
     class func logout() {
         VK.sessions.default.logOut()
         print("SwiftyVK: LogOut")
