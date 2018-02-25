@@ -7,5 +7,6 @@ pod 'GoogleMaps'
 pod 'GooglePlaces'
 pod 'SwiftyVK'
 pod 'Just'
+pod 'ObjectMapper', '~> 3.1'
   use_frameworks!
 end

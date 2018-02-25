@@ -10,19 +10,11 @@ import SwiftyVK
 import Just
 
 class LoginViewController: UIViewController {
-    //MARK: Actions
-    
-    @IBAction func btnVkclick(_ sender: UIButton) {
-        
 
+    @IBAction func btnVkclick(_ sender: UIButton) {
 
         APIWorker.authorize(success: { info in
-            
-            self.dismiss(animated: false, completion: nil)
-            let profileViewController = self.storyboard?.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
-            self.navigationController?.pushViewController(profileViewController, animated: true)
-            self.dismiss(animated: false, completion: nil)
-            
+            self.navigationController?.popToRootViewController(animated: true)
         })
     }
     

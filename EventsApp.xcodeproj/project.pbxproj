@@ -18,7 +18,14 @@
 		8A3AD5192036316300BAFB9D /* VKDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3AD5182036316300BAFB9D /* VKDelegate.swift */; };
 		8A3AD51B20364D3200BAFB9D /* APIWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3AD51A20364D3200BAFB9D /* APIWorker.swift */; };
 		8A3AD523203DA4C000BAFB9D /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3AD522203DA4C000BAFB9D /* ProfileViewController.swift */; };
+		8A3AD525203E3AA700BAFB9D /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3AD524203E3AA700BAFB9D /* Error.swift */; };
+		8A3AD527203E443200BAFB9D /* ProfileTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3AD526203E443200BAFB9D /* ProfileTabController.swift */; };
+		8A3AD529203F78EC00BAFB9D /* ProfileAndEventsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3AD528203F78EC00BAFB9D /* ProfileAndEventsController.swift */; };
 		8A52613B202A84AB00A0AA2F /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 8A52613A202A84AB00A0AA2F /* Podfile */; };
+		8A5FE9C82042E78100B87BB2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5FE9C72042E78100B87BB2 /* Extensions.swift */; };
+		8A7CD1602040A94500D4C113 /* SmallEventDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7CD15F2040A94500D4C113 /* SmallEventDTO.swift */; };
+		8A7CD1622040AB8900D4C113 /* LoginDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7CD1612040AB8900D4C113 /* LoginDTO.swift */; };
+		8A7CD1642040B60100D4C113 /* MapEventDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7CD1632040B60100D4C113 /* MapEventDTO.swift */; };
 		FD9961C3C15F38A890BC0C9E /* Pods_EventsApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2050D2A1E945736434EAC7CF /* Pods_EventsApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -40,7 +47,14 @@
 		8A3AD5182036316300BAFB9D /* VKDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKDelegate.swift; sourceTree = "<group>"; };
 		8A3AD51A20364D3200BAFB9D /* APIWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIWorker.swift; sourceTree = "<group>"; };
 		8A3AD522203DA4C000BAFB9D /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		8A3AD524203E3AA700BAFB9D /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		8A3AD526203E443200BAFB9D /* ProfileTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTabController.swift; sourceTree = "<group>"; };
+		8A3AD528203F78EC00BAFB9D /* ProfileAndEventsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAndEventsController.swift; sourceTree = "<group>"; };
 		8A52613A202A84AB00A0AA2F /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		8A5FE9C72042E78100B87BB2 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		8A7CD15F2040A94500D4C113 /* SmallEventDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallEventDTO.swift; sourceTree = "<group>"; };
+		8A7CD1612040AB8900D4C113 /* LoginDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDTO.swift; sourceTree = "<group>"; };
+		8A7CD1632040B60100D4C113 /* MapEventDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapEventDTO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +90,7 @@
 		8A193B6A202A62BD00E6E276 /* EventsApp */ = {
 			isa = PBXGroup;
 			children = (
+				8A3AD52A20401A6700BAFB9D /* Models */,
 				8A3AD5172036314300BAFB9D /* Services */,
 				8A3AD5162036310A00BAFB9D /* ViewControllers */,
 				8A193B7F202A647700E6E276 /* EventsApp.entitlements */,
@@ -105,6 +120,8 @@
 				8A193B6F202A62BE00E6E276 /* LoginViewController.swift */,
 				8A124A26202B54B8002E9800 /* GroupsViewController.swift */,
 				8A3AD522203DA4C000BAFB9D /* ProfileViewController.swift */,
+				8A3AD526203E443200BAFB9D /* ProfileTabController.swift */,
+				8A3AD528203F78EC00BAFB9D /* ProfileAndEventsController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -114,8 +131,20 @@
 			children = (
 				8A3AD5182036316300BAFB9D /* VKDelegate.swift */,
 				8A3AD51A20364D3200BAFB9D /* APIWorker.swift */,
+				8A3AD524203E3AA700BAFB9D /* Error.swift */,
+				8A5FE9C72042E78100B87BB2 /* Extensions.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		8A3AD52A20401A6700BAFB9D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8A7CD15F2040A94500D4C113 /* SmallEventDTO.swift */,
+				8A7CD1612040AB8900D4C113 /* LoginDTO.swift */,
+				8A7CD1632040B60100D4C113 /* MapEventDTO.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		92C09C3AFCE09A302CD72341 /* Pods */ = {
@@ -256,10 +285,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-EventsApp/Pods-EventsApp-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Just/Just.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Just.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -273,13 +304,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A3AD525203E3AA700BAFB9D /* Error.swift in Sources */,
+				8A7CD1622040AB8900D4C113 /* LoginDTO.swift in Sources */,
 				8A124A27202B54B8002E9800 /* GroupsViewController.swift in Sources */,
 				8A193B70202A62BE00E6E276 /* LoginViewController.swift in Sources */,
 				8A3AD5192036316300BAFB9D /* VKDelegate.swift in Sources */,
+				8A3AD529203F78EC00BAFB9D /* ProfileAndEventsController.swift in Sources */,
+				8A5FE9C82042E78100B87BB2 /* Extensions.swift in Sources */,
 				8A193B6C202A62BE00E6E276 /* AppDelegate.swift in Sources */,
 				8A3AD523203DA4C000BAFB9D /* ProfileViewController.swift in Sources */,
+				8A7CD1602040A94500D4C113 /* SmallEventDTO.swift in Sources */,
 				8A3AD51B20364D3200BAFB9D /* APIWorker.swift in Sources */,
+				8A3AD527203E443200BAFB9D /* ProfileTabController.swift in Sources */,
 				8A193B6E202A62BE00E6E276 /* MapViewController.swift in Sources */,
+				8A7CD1642040B60100D4C113 /* MapEventDTO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

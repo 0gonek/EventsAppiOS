@@ -1,9 +1,10 @@
 import Foundation
 import SwiftyVK
-
+import Just
 
 final class APIWorker {
 
+    private static let connectionUrl = "walkerapp.ru:8080"
     class func authorize( success: @escaping ([String : String]) -> ())
     {
         VK.sessions.default.logIn(
@@ -19,6 +20,11 @@ final class APIWorker {
         print("SwiftyVK: LogOut")
     }
     
+    class func getSmallEvents() -> [SmallEventDTO]{
+        var output = [SmallEventDTO]()
+        let responce = Just.get(connectionUrl)
+        return output
+    }
     
 }
 
