@@ -12,12 +12,7 @@ import UIKit
 public class ProfileTabController: UINavigationController
 {
     override public func viewDidLoad() {
-        
-        if(UserDefaults.standard.string(forKey: defaultsKeys.authType)=="")
-        {
-            let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-            self.navigationController?.pushViewController(loginViewController, animated: true)
-            self.dismiss(animated: false, completion: nil)
-        }
+       
     }
+    
 }

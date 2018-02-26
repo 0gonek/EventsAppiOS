@@ -16,3 +16,42 @@ extension UIImageView {
         self.layer.masksToBounds = true
     }
 }
+
+extension Date {
+    var millisecondsSince1970:Int64 {
+        return Int64((self.timeIntervalSince1970 * 1000.0).rounded())
+    }
+    
+    init(milliseconds:Int64) {
+        self = Date(timeIntervalSince1970: TimeInterval(milliseconds / 1000))
+    }
+}
+
+extension UIViewController
+{
+    func popBack(_ nb: Int) {
+        if let viewControllers: [UIViewController] = self.navigationController?.viewControllers {
+            guard viewControllers.count < nb else {
+                self.navigationController?.popToViewController(viewControllers[viewControllers.count - nb], animated: true)
+                return
+            }
+        }
+    }
+}
+
+extension UIApplication {
+    class func topViewController(controller: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+        if let navigationController = controller as? UINavigationController {
+            return topViewController(controller: navigationController.visibleViewController)
+        }
+        if let tabController = controller as? UITabBarController {
+            if let selected = tabController.selectedViewController {
+                return topViewController(controller: selected)
+            }
+        }
+        if let presented = controller?.presentedViewController {
+            return topViewController(controller: presented)
+        }
+        return controller
+    }
+}

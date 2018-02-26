@@ -12,9 +12,11 @@ import Just
 class LoginViewController: UIViewController {
 
     @IBAction func btnVkclick(_ sender: UIButton) {
-
+        APIWorker.logout()
         APIWorker.authorize(success: { info in
             self.navigationController?.popToRootViewController(animated: true)
+        },
+                            onError: {error in
         })
     }
     

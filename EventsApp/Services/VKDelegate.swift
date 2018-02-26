@@ -22,13 +22,16 @@ struct defaultsKeys {
 final class VKDelegate: SwiftyVKDelegate {
     
     let scopes: Scopes = []
-    let connectionUrl = "http://192.168.1.79:8080/users/loginvk"
+    let connectionUrl = "walkerapp.ru:8080/users/loginvk"
     func vkNeedsScopes(for sessionId: String) -> Scopes {
         return scopes
     }
     
     func vkNeedToPresent(viewController: VKViewController) {
-
+        if let topController = UIApplication.topViewController()
+        {
+            topController.navigationController?.pushViewController(viewController, animated: true)
+        }
             if let rootController = UIApplication.shared.keyWindow?.rootViewController {
                 rootController.present(viewController, animated: true)
             }

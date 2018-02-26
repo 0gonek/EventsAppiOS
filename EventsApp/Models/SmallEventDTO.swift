@@ -27,4 +27,11 @@ class SmallEventDTO : Mappable{
         description <- map["description"]
         date <- map["date"]
     }
+
+    init(){
+        id = 0
+        name = "Imma name"
+        description = "Imma description"
+        date = 1000109
+    }
 }
