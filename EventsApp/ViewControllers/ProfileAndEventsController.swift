@@ -15,15 +15,34 @@ class ProfileAndEventsViewController : UIViewController{
     @IBOutlet weak var backImg: UIImageView!
     @IBOutlet weak var profileImageShadow: UIView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var textName: UILabel!
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    
+    
     @IBOutlet weak var headerHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var textNameHeightConstant: NSLayoutConstraint!
     @IBOutlet weak var backImgHeightConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var profileImageHeightConstrant: NSLayoutConstraint!
-    
     @IBOutlet weak var profileImageWidthConstrant: NSLayoutConstraint!
-    @IBOutlet weak var textName: UILabel!
     
+
+    @IBAction func segmentedControlIndexChanged(_ sender: UISegmentedControl) {
+        switch segmentedControl.selectedSegmentIndex
+        {
+        case 0:
+            eventsList = APIWorker.getMySmallEvents()
+            tableView.reloadData()
+        case 1:
+            eventsList = APIWorker.getUpcomingSmallEvents()
+            tableView.reloadData()
+        case 2:
+            eventsList = APIWorker.getMySmallEvents()
+            tableView.reloadData()
+        default:
+            eventsList = APIWorker.getMySmallEvents()
+            tableView.reloadData()
+        }
+    }
     
     let maxHeaderHeight: CGFloat = 220
     let minHeaderHeight: CGFloat = 55
@@ -37,7 +56,7 @@ class ProfileAndEventsViewController : UIViewController{
     var previousScrollOffset : CGFloat = 0
     
     var eventsList: [SmallEventDTO] = [SmallEventDTO]()
-    
+    var firstLogin : Bool = true
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -52,7 +71,7 @@ class ProfileAndEventsViewController : UIViewController{
             backImg.image = UIImage(data: data!)
         }
         customizePics()
-        eventsList = APIWorker.getSmallEvents()
+        eventsList = APIWorker.getMySmallEvents()
         tableView.reloadData()
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -62,14 +81,25 @@ class ProfileAndEventsViewController : UIViewController{
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        
+    }
     private func checkLogin()
     {
-        if(UserDefaults.standard.string(forKey: defaultsKeys.authType)=="" || UserDefaults.standard.string(forKey: defaultsKeys.authType)==nil)
+        if(firstLogin)
         {
-            let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-            self.navigationController?.pushViewController(loginViewController, animated: false)
+            if(UserDefaults.standard.string(forKey: defaultsKeys.authType)=="" || UserDefaults.standard.string(forKey: defaultsKeys.authType)==nil)
+            {
+                let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+                self.navigationController?.pushViewController(loginViewController, animated: false)
+                firstLogin = false
+            }
         }
     }
     

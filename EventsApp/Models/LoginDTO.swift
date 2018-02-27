@@ -9,7 +9,8 @@
 import Foundation
 import ObjectMapper
 
-class LoginDTO: Mappable{
+class LoginDTO: Mappable
+{
     var serverId : Int64?
     var avatar: String?
     var name: String?

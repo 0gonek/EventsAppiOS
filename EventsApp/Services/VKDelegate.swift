@@ -24,6 +24,7 @@ final class VKDelegate: SwiftyVKDelegate {
     
     let scopes: Scopes = [.offline]
     let connectionUrl = "http://13.74.42.169:8080/users/loginvk"
+    public static var user: LoginDTO? = nil
     
     func vkNeedsScopes(for sessionId: String) -> Scopes {
         return scopes
@@ -35,8 +36,11 @@ final class VKDelegate: SwiftyVKDelegate {
         }*/
         if let topController = UIApplication.topViewController()
         {
-            viewController.modalPresentationStyle = .overCurrentContext
-            topController.present(viewController, animated:  true, completion: nil)
+            /*viewController.modalPresentationStyle = .overCurrentContext
+            let temp = topController.storyboard?.instantiateViewController(withIdentifier: "AuthScreen") as! UIViewController
+            topController.navigationController?.pushViewController(temp, animated: true)*/
+            topController.present(viewController, animated: true)
+            //topController.present(viewController, animated:  true, completion: nil)
         }
     }
     
@@ -53,6 +57,7 @@ final class VKDelegate: SwiftyVKDelegate {
         if let lol = Mapper<LoginDTO>().map(JSONObject: responce.json)
         {
             updateDefaults(id: info["user_id"]!, token: info["access_token"]!, authType: "VK", name: lol.name!, avatar: lol.avatar!, serverID: lol.serverId ?? 0)
+            VKDelegate.user = lol
         }
     }
     
@@ -71,11 +76,13 @@ final class VKDelegate: SwiftyVKDelegate {
         if let lol = Mapper<LoginDTO>().map(JSONObject: responce.json)
         {
             updateDefaults(id: info["user_id"]!, token: info["access_token"]!, authType: "VK", name: lol.name!, avatar: lol.avatar!, serverID: lol.serverId ?? 0)
+            VKDelegate.user = lol
         }
     }
     
     func vkTokenRemoved(for sessionId: String) {
         updateDefaults()
+        VKDelegate.user = nil
     }
     
     public func silentLogin() -> Bool
@@ -98,6 +105,7 @@ final class VKDelegate: SwiftyVKDelegate {
             {
                 let defaults = UserDefaults.standard
                 updateDefaults(id: defaults.string(forKey: defaultsKeys.name)!, token: defaults.string(forKey: defaultsKeys.token)!, authType: "VK", name: lol.name!, avatar: lol.avatar!, serverID: lol.serverId ?? 0)
+                VKDelegate.user = lol
             }
             
         }

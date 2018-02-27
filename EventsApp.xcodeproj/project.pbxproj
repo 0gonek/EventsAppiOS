@@ -24,6 +24,9 @@
 		8A52613B202A84AB00A0AA2F /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 8A52613A202A84AB00A0AA2F /* Podfile */; };
 		8A5FE9C82042E78100B87BB2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5FE9C72042E78100B87BB2 /* Extensions.swift */; };
 		8A5FE9CA2044F3EE00B87BB2 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5FE9C92044F3EE00B87BB2 /* TabBarController.swift */; };
+		8A5FE9CC2045825700B87BB2 /* EventBigController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5FE9CB2045825700B87BB2 /* EventBigController.swift */; };
+		8A5FE9CE2045841500B87BB2 /* BigEventDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5FE9CD2045841500B87BB2 /* BigEventDTO.swift */; };
+		8A5FE9D020460BF000B87BB2 /* SmallEventsDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5FE9CF20460BF000B87BB2 /* SmallEventsDTO.swift */; };
 		8A7CD1602040A94500D4C113 /* SmallEventDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7CD15F2040A94500D4C113 /* SmallEventDTO.swift */; };
 		8A7CD1622040AB8900D4C113 /* LoginDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7CD1612040AB8900D4C113 /* LoginDTO.swift */; };
 		8A7CD1642040B60100D4C113 /* MapEventDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7CD1632040B60100D4C113 /* MapEventDTO.swift */; };
@@ -54,6 +57,9 @@
 		8A52613A202A84AB00A0AA2F /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		8A5FE9C72042E78100B87BB2 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		8A5FE9C92044F3EE00B87BB2 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		8A5FE9CB2045825700B87BB2 /* EventBigController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventBigController.swift; sourceTree = "<group>"; };
+		8A5FE9CD2045841500B87BB2 /* BigEventDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigEventDTO.swift; sourceTree = "<group>"; };
+		8A5FE9CF20460BF000B87BB2 /* SmallEventsDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallEventsDTO.swift; sourceTree = "<group>"; };
 		8A7CD15F2040A94500D4C113 /* SmallEventDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallEventDTO.swift; sourceTree = "<group>"; };
 		8A7CD1612040AB8900D4C113 /* LoginDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDTO.swift; sourceTree = "<group>"; };
 		8A7CD1632040B60100D4C113 /* MapEventDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapEventDTO.swift; sourceTree = "<group>"; };
@@ -125,6 +131,7 @@
 				8A3AD526203E443200BAFB9D /* ProfileTabController.swift */,
 				8A3AD528203F78EC00BAFB9D /* ProfileAndEventsController.swift */,
 				8A5FE9C92044F3EE00B87BB2 /* TabBarController.swift */,
+				8A5FE9CB2045825700B87BB2 /* EventBigController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -144,8 +151,10 @@
 			isa = PBXGroup;
 			children = (
 				8A7CD15F2040A94500D4C113 /* SmallEventDTO.swift */,
+				8A5FE9CF20460BF000B87BB2 /* SmallEventsDTO.swift */,
 				8A7CD1612040AB8900D4C113 /* LoginDTO.swift */,
 				8A7CD1632040B60100D4C113 /* MapEventDTO.swift */,
+				8A5FE9CD2045841500B87BB2 /* BigEventDTO.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -308,6 +317,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A3AD525203E3AA700BAFB9D /* Error.swift in Sources */,
+				8A5FE9CE2045841500B87BB2 /* BigEventDTO.swift in Sources */,
 				8A7CD1622040AB8900D4C113 /* LoginDTO.swift in Sources */,
 				8A124A27202B54B8002E9800 /* GroupsViewController.swift in Sources */,
 				8A5FE9CA2044F3EE00B87BB2 /* TabBarController.swift in Sources */,
@@ -318,9 +328,11 @@
 				8A193B6C202A62BE00E6E276 /* AppDelegate.swift in Sources */,
 				8A3AD523203DA4C000BAFB9D /* ProfileViewController.swift in Sources */,
 				8A7CD1602040A94500D4C113 /* SmallEventDTO.swift in Sources */,
+				8A5FE9CC2045825700B87BB2 /* EventBigController.swift in Sources */,
 				8A3AD51B20364D3200BAFB9D /* APIWorker.swift in Sources */,
 				8A3AD527203E443200BAFB9D /* ProfileTabController.swift in Sources */,
 				8A193B6E202A62BE00E6E276 /* MapViewController.swift in Sources */,
+				8A5FE9D020460BF000B87BB2 /* SmallEventsDTO.swift in Sources */,
 				8A7CD1642040B60100D4C113 /* MapEventDTO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
