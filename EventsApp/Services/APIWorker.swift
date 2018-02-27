@@ -18,6 +18,10 @@ final class APIWorker {
         VK.sessions.default.logOut()
         print("SwiftyVK: LogOut")
     }
+    class func silentLogin() -> Bool
+    {
+        return (vkDelegateReference as! VKDelegate).silentLogin()
+    }
     
     class func getSmallEvents() -> [SmallEventDTO]{
         var output = [SmallEventDTO]()

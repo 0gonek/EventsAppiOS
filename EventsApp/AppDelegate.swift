@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         vkDelegateReference = VKDelegate()
         VK.setUp(appId: "6219519", delegate: vkDelegateReference!)
         do{
-           // try (vkDelegateReference as! VKDelegate).silentLogin()
+            try (vkDelegateReference as! VKDelegate).silentLogin()
         }
         catch
         {

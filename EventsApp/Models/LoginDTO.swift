@@ -19,8 +19,14 @@ class LoginDTO: Mappable{
     }
     
     func mapping(map: Map) {
-        serverId <- map["serverId"]
+        serverId <- map["serverID"]
         avatar <- map["avatar"]
         name <- map["name"]
+    }
+    init(name: String?, avatar: String?, serverId: Int64)
+    {
+        self.serverId = serverId
+        self.name = name
+        self.avatar = avatar
     }
 }

@@ -23,6 +23,7 @@
 		8A3AD529203F78EC00BAFB9D /* ProfileAndEventsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3AD528203F78EC00BAFB9D /* ProfileAndEventsController.swift */; };
 		8A52613B202A84AB00A0AA2F /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 8A52613A202A84AB00A0AA2F /* Podfile */; };
 		8A5FE9C82042E78100B87BB2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5FE9C72042E78100B87BB2 /* Extensions.swift */; };
+		8A5FE9CA2044F3EE00B87BB2 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5FE9C92044F3EE00B87BB2 /* TabBarController.swift */; };
 		8A7CD1602040A94500D4C113 /* SmallEventDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7CD15F2040A94500D4C113 /* SmallEventDTO.swift */; };
 		8A7CD1622040AB8900D4C113 /* LoginDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7CD1612040AB8900D4C113 /* LoginDTO.swift */; };
 		8A7CD1642040B60100D4C113 /* MapEventDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7CD1632040B60100D4C113 /* MapEventDTO.swift */; };
@@ -52,6 +53,7 @@
 		8A3AD528203F78EC00BAFB9D /* ProfileAndEventsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAndEventsController.swift; sourceTree = "<group>"; };
 		8A52613A202A84AB00A0AA2F /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		8A5FE9C72042E78100B87BB2 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		8A5FE9C92044F3EE00B87BB2 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		8A7CD15F2040A94500D4C113 /* SmallEventDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallEventDTO.swift; sourceTree = "<group>"; };
 		8A7CD1612040AB8900D4C113 /* LoginDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDTO.swift; sourceTree = "<group>"; };
 		8A7CD1632040B60100D4C113 /* MapEventDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapEventDTO.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				8A3AD522203DA4C000BAFB9D /* ProfileViewController.swift */,
 				8A3AD526203E443200BAFB9D /* ProfileTabController.swift */,
 				8A3AD528203F78EC00BAFB9D /* ProfileAndEventsController.swift */,
+				8A5FE9C92044F3EE00B87BB2 /* TabBarController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 				8A3AD525203E3AA700BAFB9D /* Error.swift in Sources */,
 				8A7CD1622040AB8900D4C113 /* LoginDTO.swift in Sources */,
 				8A124A27202B54B8002E9800 /* GroupsViewController.swift in Sources */,
+				8A5FE9CA2044F3EE00B87BB2 /* TabBarController.swift in Sources */,
 				8A193B70202A62BE00E6E276 /* LoginViewController.swift in Sources */,
 				8A3AD5192036316300BAFB9D /* VKDelegate.swift in Sources */,
 				8A3AD529203F78EC00BAFB9D /* ProfileAndEventsController.swift in Sources */,

@@ -11,8 +11,5 @@ import UIKit
 
 public class ProfileTabController: UINavigationController
 {
-    override public func viewDidLoad() {
-       
-    }
-    
+
 }

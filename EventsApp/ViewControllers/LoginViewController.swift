@@ -12,17 +12,20 @@ import Just
 class LoginViewController: UIViewController {
 
     @IBAction func btnVkclick(_ sender: UIButton) {
-        APIWorker.logout()
+        
+        self.dismiss(animated: true, completion: nil)
+
+       /* APIWorker.logout()
         APIWorker.authorize(success: { info in
-            self.navigationController?.popToRootViewController(animated: true)
         },
                             onError: {error in
         })
+*/
     }
     
     @IBAction func btnFbClick(_ sender: UIButton) {
         APIWorker.logout()
-        //let kek = Just.get("http://192.168.1.79:8080/test/hello")
+        let kek = Just.get("http://13.74.42.169:8080/test/hello")
         
         let message = "Successfully logged in"
         let alert = UIAlertController(title: "Success", message: message, preferredStyle: UIAlertControllerStyle.alert)

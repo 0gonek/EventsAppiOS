@@ -37,10 +37,20 @@ class ProfileAndEventsViewController : UIViewController{
     var previousScrollOffset : CGFloat = 0
     
     var eventsList: [SmallEventDTO] = [SmallEventDTO]()
-
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
+
+        let user = getUserDTO()
+        textName.text = user.name
+        
+        if let url = URL(string: user.avatar ?? "") //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+        {
+            let data = try? Data(contentsOf: url)
+            profileImg.image = UIImage(data: data!)
+            backImg.image = UIImage(data: data!)
+        }
         customizePics()
         eventsList = APIWorker.getSmallEvents()
         tableView.reloadData()
@@ -60,8 +70,15 @@ class ProfileAndEventsViewController : UIViewController{
         {
             let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
             self.navigationController?.pushViewController(loginViewController, animated: false)
-            self.dismiss(animated: false, completion: nil)
         }
+    }
+    
+    private func getUserDTO() -> LoginDTO
+    {
+        let defaults = UserDefaults.standard
+        return LoginDTO(name: defaults.string(forKey: defaultsKeys.name),
+                        avatar: defaults.string(forKey: defaultsKeys.avatar),
+                        serverId: Int64(defaults.string(forKey: defaultsKeys.serverId) ?? "") ?? 0)
     }
     
     private func customizePics()
@@ -97,7 +114,6 @@ class EventsCell : UITableViewCell{
     @IBOutlet weak var txtDate: UILabel!
     @IBOutlet weak var txtLabel: UILabel!
     @IBOutlet weak var txtContent: UILabel!
-    
 }
 
 extension ProfileAndEventsViewController : UITableViewDataSource
@@ -121,7 +137,7 @@ extension ProfileAndEventsViewController : UITableViewDataSource
     private func formatDate(_ mill: Int64) -> String
     {
         let formatter = DateFormatter()
-        formatter.dateStyle = .medium
+        formatter.dateStyle = .short
         formatter.timeStyle = .short
         formatter.locale = Locale(identifier: "ru_RU")
         return formatter.string(from: Date(milliseconds: mill))
