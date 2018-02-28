@@ -52,6 +52,23 @@ final class APIWorker {
             return [SmallEventDTO]()
         }
     }
+    
+    public class func getEventInfo(_ id: Int64) -> BigEventDTO
+    {
+        let responce = Just.get(connectionUrl+"events/get", params:
+            ["event_id":id,
+             "id": Int64(UserDefaults.standard.string(forKey: defaultsKeys.serverId)!)!,
+             "token": UserDefaults.standard.string(forKey: defaultsKeys.token)!
+            ])
+        if let temp = Mapper<BigEventDTO>().map(JSONObject: responce.json)
+        {
+            return temp
+        }
+        else {
+            return BigEventDTO()
+        }
+    }
+    
     private class func jsonToString(_ json: Any?) -> String{
         do {
             let data1 =  try JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions.prettyPrinted)

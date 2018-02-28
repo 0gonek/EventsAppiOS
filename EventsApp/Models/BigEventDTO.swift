@@ -47,7 +47,10 @@ class BigEventDTO : Mappable
         participants <- map["participants"]
         groupId <- map["groupId"]
         groupName <- map["groupName"]
-        isAccepted <- map["isAccepted"]
+        isAccepted <- map["accepted"]
     }
     
+    public init(){
+        
+    }
 }
