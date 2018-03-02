@@ -27,20 +27,13 @@ class LoginViewController: UIViewController {
                                 
         })
     }
-    
     @IBAction func btnFbClick(_ sender: UIButton) {
         APIWorker.logout()
-        let kek = Just.get("http://13.74.42.169:8080/test/hello")
-        
-        let message = "Successfully logged in"
-        let alert = UIAlertController(title: "Success", message: message, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+       
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     override func viewWillAppear(_ animated: Bool)
     {

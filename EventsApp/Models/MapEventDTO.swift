@@ -22,7 +22,7 @@ class MapEventDTO :Mappable{
     func mapping(map: Map) {
         id <- map["id"]
         latitude <- map["latitude"]
-        longtitude <- map["longtitude"]
+        longtitude <- map["longitude"]
         type <- map["type"]
     }
 }

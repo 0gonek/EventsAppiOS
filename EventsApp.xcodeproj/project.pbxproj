@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8A124A27202B54B8002E9800 /* GroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A124A26202B54B8002E9800 /* GroupsViewController.swift */; };
-		8A1594A020463205009A0688 /* EventController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A15949F20463205009A0688 /* EventController.swift */; };
+		8A1594A020463205009A0688 /* EventBigController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A15949F20463205009A0688 /* EventBigController.swift */; };
+		8A1594A3204726ED009A0688 /* CellToEventSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1594A2204726ED009A0688 /* CellToEventSegue.swift */; };
 		8A193B6C202A62BE00E6E276 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A193B6B202A62BE00E6E276 /* AppDelegate.swift */; };
 		8A193B6E202A62BE00E6E276 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A193B6D202A62BE00E6E276 /* MapViewController.swift */; };
 		8A193B70202A62BE00E6E276 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A193B6F202A62BE00E6E276 /* LoginViewController.swift */; };
@@ -18,15 +19,19 @@
 		8A193B84202A6C0B00E6E276 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8A193B83202A6C0B00E6E276 /* Settings.bundle */; };
 		8A3AD5192036316300BAFB9D /* VKDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3AD5182036316300BAFB9D /* VKDelegate.swift */; };
 		8A3AD51B20364D3200BAFB9D /* APIWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3AD51A20364D3200BAFB9D /* APIWorker.swift */; };
-		8A3AD523203DA4C000BAFB9D /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3AD522203DA4C000BAFB9D /* ProfileViewController.swift */; };
 		8A3AD525203E3AA700BAFB9D /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3AD524203E3AA700BAFB9D /* Error.swift */; };
 		8A3AD527203E443200BAFB9D /* ProfileTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3AD526203E443200BAFB9D /* ProfileTabController.swift */; };
 		8A3AD529203F78EC00BAFB9D /* ProfileAndEventsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3AD528203F78EC00BAFB9D /* ProfileAndEventsController.swift */; };
 		8A52613B202A84AB00A0AA2F /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 8A52613A202A84AB00A0AA2F /* Podfile */; };
+		8A5CACCD20497C2700902497 /* AddEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5CACCC20497C2700902497 /* AddEventViewController.swift */; };
 		8A5FE9C82042E78100B87BB2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5FE9C72042E78100B87BB2 /* Extensions.swift */; };
 		8A5FE9CA2044F3EE00B87BB2 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5FE9C92044F3EE00B87BB2 /* TabBarController.swift */; };
 		8A5FE9CE2045841500B87BB2 /* BigEventDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5FE9CD2045841500B87BB2 /* BigEventDTO.swift */; };
 		8A5FE9D020460BF000B87BB2 /* SmallEventsDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5FE9CF20460BF000B87BB2 /* SmallEventsDTO.swift */; };
+		8A6AAD8C2047FEE900624479 /* ParticipantsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6AAD8B2047FEE900624479 /* ParticipantsController.swift */; };
+		8A6AAD8E204838A900624479 /* LoginsDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6AAD8D204838A800624479 /* LoginsDTO.swift */; };
+		8A7941762048C08A0097934E /* mapStyle.json in Resources */ = {isa = PBXBuildFile; fileRef = 8A7941752048C0890097934E /* mapStyle.json */; };
+		8A79417A2048CB1E0097934E /* MapEventsDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7941792048CB1E0097934E /* MapEventsDTO.swift */; };
 		8A7CD1602040A94500D4C113 /* SmallEventDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7CD15F2040A94500D4C113 /* SmallEventDTO.swift */; };
 		8A7CD1622040AB8900D4C113 /* LoginDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7CD1612040AB8900D4C113 /* LoginDTO.swift */; };
 		8A7CD1642040B60100D4C113 /* MapEventDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7CD1632040B60100D4C113 /* MapEventDTO.swift */; };
@@ -38,7 +43,8 @@
 		2050D2A1E945736434EAC7CF /* Pods_EventsApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EventsApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D90FB167FBD18EB8E0070BB /* Pods-EventsApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EventsApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EventsApp/Pods-EventsApp.debug.xcconfig"; sourceTree = "<group>"; };
 		8A124A26202B54B8002E9800 /* GroupsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsViewController.swift; sourceTree = "<group>"; };
-		8A15949F20463205009A0688 /* EventController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventController.swift; sourceTree = "<group>"; };
+		8A15949F20463205009A0688 /* EventBigController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventBigController.swift; sourceTree = "<group>"; };
+		8A1594A2204726ED009A0688 /* CellToEventSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellToEventSegue.swift; sourceTree = "<group>"; };
 		8A193B68202A62BD00E6E276 /* EventsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EventsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A193B6B202A62BE00E6E276 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A193B6D202A62BE00E6E276 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -47,19 +53,22 @@
 		8A193B74202A62BE00E6E276 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8A193B77202A62BE00E6E276 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8A193B79202A62BE00E6E276 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8A193B7F202A647700E6E276 /* EventsApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EventsApp.entitlements; sourceTree = "<group>"; };
 		8A193B83202A6C0B00E6E276 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		8A3AD5182036316300BAFB9D /* VKDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKDelegate.swift; sourceTree = "<group>"; };
 		8A3AD51A20364D3200BAFB9D /* APIWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIWorker.swift; sourceTree = "<group>"; };
-		8A3AD522203DA4C000BAFB9D /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		8A3AD524203E3AA700BAFB9D /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		8A3AD526203E443200BAFB9D /* ProfileTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTabController.swift; sourceTree = "<group>"; };
 		8A3AD528203F78EC00BAFB9D /* ProfileAndEventsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAndEventsController.swift; sourceTree = "<group>"; };
 		8A52613A202A84AB00A0AA2F /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		8A5CACCC20497C2700902497 /* AddEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventViewController.swift; sourceTree = "<group>"; };
 		8A5FE9C72042E78100B87BB2 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		8A5FE9C92044F3EE00B87BB2 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		8A5FE9CD2045841500B87BB2 /* BigEventDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigEventDTO.swift; sourceTree = "<group>"; };
 		8A5FE9CF20460BF000B87BB2 /* SmallEventsDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallEventsDTO.swift; sourceTree = "<group>"; };
+		8A6AAD8B2047FEE900624479 /* ParticipantsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantsController.swift; sourceTree = "<group>"; };
+		8A6AAD8D204838A800624479 /* LoginsDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginsDTO.swift; sourceTree = "<group>"; };
+		8A7941752048C0890097934E /* mapStyle.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mapStyle.json; sourceTree = "<group>"; };
+		8A7941792048CB1E0097934E /* MapEventsDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapEventsDTO.swift; sourceTree = "<group>"; };
 		8A7CD15F2040A94500D4C113 /* SmallEventDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallEventDTO.swift; sourceTree = "<group>"; };
 		8A7CD1612040AB8900D4C113 /* LoginDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDTO.swift; sourceTree = "<group>"; };
 		8A7CD1632040B60100D4C113 /* MapEventDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapEventDTO.swift; sourceTree = "<group>"; };
@@ -77,6 +86,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8A1594A120472665009A0688 /* Segues */ = {
+			isa = PBXGroup;
+			children = (
+				8A1594A2204726ED009A0688 /* CellToEventSegue.swift */,
+			);
+			path = Segues;
+			sourceTree = "<group>";
+		};
 		8A193B5F202A62BD00E6E276 = {
 			isa = PBXGroup;
 			children = (
@@ -98,10 +115,10 @@
 		8A193B6A202A62BD00E6E276 /* EventsApp */ = {
 			isa = PBXGroup;
 			children = (
+				8A1594A120472665009A0688 /* Segues */,
 				8A3AD52A20401A6700BAFB9D /* Models */,
 				8A3AD5172036314300BAFB9D /* Services */,
 				8A3AD5162036310A00BAFB9D /* ViewControllers */,
-				8A193B7F202A647700E6E276 /* EventsApp.entitlements */,
 				8A193B6B202A62BE00E6E276 /* AppDelegate.swift */,
 				8A52613A202A84AB00A0AA2F /* Podfile */,
 				8A193B71202A62BE00E6E276 /* Main.storyboard */,
@@ -109,6 +126,7 @@
 				8A193B74202A62BE00E6E276 /* Assets.xcassets */,
 				8A193B76202A62BE00E6E276 /* LaunchScreen.storyboard */,
 				8A193B79202A62BE00E6E276 /* Info.plist */,
+				8A7941752048C0890097934E /* mapStyle.json */,
 			);
 			path = EventsApp;
 			sourceTree = "<group>";
@@ -127,11 +145,12 @@
 				8A193B6D202A62BE00E6E276 /* MapViewController.swift */,
 				8A193B6F202A62BE00E6E276 /* LoginViewController.swift */,
 				8A124A26202B54B8002E9800 /* GroupsViewController.swift */,
-				8A3AD522203DA4C000BAFB9D /* ProfileViewController.swift */,
 				8A3AD526203E443200BAFB9D /* ProfileTabController.swift */,
 				8A3AD528203F78EC00BAFB9D /* ProfileAndEventsController.swift */,
 				8A5FE9C92044F3EE00B87BB2 /* TabBarController.swift */,
-				8A15949F20463205009A0688 /* EventController.swift */,
+				8A15949F20463205009A0688 /* EventBigController.swift */,
+				8A6AAD8B2047FEE900624479 /* ParticipantsController.swift */,
+				8A5CACCC20497C2700902497 /* AddEventViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -153,7 +172,9 @@
 				8A7CD15F2040A94500D4C113 /* SmallEventDTO.swift */,
 				8A5FE9CF20460BF000B87BB2 /* SmallEventsDTO.swift */,
 				8A7CD1612040AB8900D4C113 /* LoginDTO.swift */,
+				8A6AAD8D204838A800624479 /* LoginsDTO.swift */,
 				8A7CD1632040B60100D4C113 /* MapEventDTO.swift */,
+				8A7941792048CB1E0097934E /* MapEventsDTO.swift */,
 				8A5FE9CD2045841500B87BB2 /* BigEventDTO.swift */,
 			);
 			path = Models;
@@ -238,6 +259,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A7941762048C08A0097934E /* mapStyle.json in Resources */,
 				8A52613B202A84AB00A0AA2F /* Podfile in Resources */,
 				8A193B84202A6C0B00E6E276 /* Settings.bundle in Resources */,
 				8A193B78202A62BE00E6E276 /* LaunchScreen.storyboard in Resources */,
@@ -317,22 +339,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A3AD525203E3AA700BAFB9D /* Error.swift in Sources */,
+				8A6AAD8C2047FEE900624479 /* ParticipantsController.swift in Sources */,
 				8A5FE9CE2045841500B87BB2 /* BigEventDTO.swift in Sources */,
 				8A7CD1622040AB8900D4C113 /* LoginDTO.swift in Sources */,
 				8A124A27202B54B8002E9800 /* GroupsViewController.swift in Sources */,
+				8A6AAD8E204838A900624479 /* LoginsDTO.swift in Sources */,
 				8A5FE9CA2044F3EE00B87BB2 /* TabBarController.swift in Sources */,
+				8A5CACCD20497C2700902497 /* AddEventViewController.swift in Sources */,
 				8A193B70202A62BE00E6E276 /* LoginViewController.swift in Sources */,
 				8A3AD5192036316300BAFB9D /* VKDelegate.swift in Sources */,
 				8A3AD529203F78EC00BAFB9D /* ProfileAndEventsController.swift in Sources */,
 				8A5FE9C82042E78100B87BB2 /* Extensions.swift in Sources */,
 				8A193B6C202A62BE00E6E276 /* AppDelegate.swift in Sources */,
-				8A3AD523203DA4C000BAFB9D /* ProfileViewController.swift in Sources */,
 				8A7CD1602040A94500D4C113 /* SmallEventDTO.swift in Sources */,
 				8A3AD51B20364D3200BAFB9D /* APIWorker.swift in Sources */,
+				8A79417A2048CB1E0097934E /* MapEventsDTO.swift in Sources */,
+				8A1594A3204726ED009A0688 /* CellToEventSegue.swift in Sources */,
 				8A3AD527203E443200BAFB9D /* ProfileTabController.swift in Sources */,
 				8A193B6E202A62BE00E6E276 /* MapViewController.swift in Sources */,
 				8A5FE9D020460BF000B87BB2 /* SmallEventsDTO.swift in Sources */,
-				8A1594A020463205009A0688 /* EventController.swift in Sources */,
+				8A1594A020463205009A0688 /* EventBigController.swift in Sources */,
 				8A7CD1642040B60100D4C113 /* MapEventDTO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

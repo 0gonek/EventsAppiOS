@@ -25,7 +25,7 @@ class ProfileAndEventsViewController : UIViewController{
     @IBOutlet weak var profileImageHeightConstrant: NSLayoutConstraint!
     @IBOutlet weak var profileImageWidthConstrant: NSLayoutConstraint!
     
-
+    
     @IBAction func segmentedControlIndexChanged(_ sender: UISegmentedControl) {
         switch segmentedControl.selectedSegmentIndex
         {
@@ -36,7 +36,7 @@ class ProfileAndEventsViewController : UIViewController{
             eventsList = APIWorker.getUpcomingSmallEvents()
             tableView.reloadData()
         case 2:
-            eventsList = APIWorker.getMySmallEvents()
+            eventsList = APIWorker.getPastSmallEvents()
             tableView.reloadData()
         default:
             eventsList = APIWorker.getMySmallEvents()
@@ -57,32 +57,52 @@ class ProfileAndEventsViewController : UIViewController{
     
     var eventsList: [SmallEventDTO] = [SmallEventDTO]()
     var firstLogin : Bool = true
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
-
+        
         let user = getUserDTO()
         textName.text = user.name
-        
-        if let url = URL(string: user.avatar ?? "") //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+        if let avatar = user.avatar
         {
-            let data = try? Data(contentsOf: url)
-            profileImg.image = UIImage(data: data!)
-            backImg.image = UIImage(data: data!)
+            if let url = URL(string: avatar) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+            {
+                do{
+                    let data = try Data(contentsOf: url)
+                    profileImg.image = UIImage(data: data)
+                    backImg.image = UIImage(data: data)
+                }
+                catch
+                {
+                    
+                }
+            }
         }
+        
         customizePics()
         eventsList = APIWorker.getMySmallEvents()
         tableView.reloadData()
     }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        checkLogin()
-    }
+    
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
-
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "cellToEventSegue" ,
+            let nextScene = segue.destination as? EventBigController ,
+            let indexPath = self.tableView.indexPathForSelectedRow {
+            let selectedEvent = APIWorker.getEventInfo(eventsList[indexPath.row].id!)
+            nextScene.currentEvent = selectedEvent
+        }
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        checkLogin()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -90,6 +110,7 @@ class ProfileAndEventsViewController : UIViewController{
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
         
     }
+    
     private func checkLogin()
     {
         if(firstLogin)
@@ -186,22 +207,22 @@ extension ProfileAndEventsViewController : UITableViewDelegate{
         let isScrollingUp = scrollDiff < 0 && scrollView.contentOffset.y < absoluteBottom
         
         if canAnimateHeader(scrollView) {
-        // Calculate new header height
-        var newHeight = self.headerHeightConstraint.constant
-        if isScrollingDown {
-            newHeight = max(self.minHeaderHeight, self.headerHeightConstraint.constant - abs(scrollDiff))
-        } else if isScrollingUp {
-            newHeight = min(self.maxHeaderHeight, self.headerHeightConstraint.constant + abs(scrollDiff))
-        }
-        
-        // Header needs to animate
-        if newHeight != self.headerHeightConstraint.constant {
-            self.headerHeightConstraint.constant = newHeight
-            self.updateHeader()
-            self.setScrollPosition(self.previousScrollOffset)
-        }
-        
-        self.previousScrollOffset = scrollView.contentOffset.y
+            // Calculate new header height
+            var newHeight = self.headerHeightConstraint.constant
+            if isScrollingDown {
+                newHeight = max(self.minHeaderHeight, self.headerHeightConstraint.constant - abs(scrollDiff))
+            } else if isScrollingUp {
+                newHeight = min(self.maxHeaderHeight, self.headerHeightConstraint.constant + abs(scrollDiff))
+            }
+            
+            // Header needs to animate
+            if newHeight != self.headerHeightConstraint.constant {
+                self.headerHeightConstraint.constant = newHeight
+                self.updateHeader()
+                self.setScrollPosition(self.previousScrollOffset)
+            }
+            
+            self.previousScrollOffset = scrollView.contentOffset.y
         }
     }
     
@@ -259,7 +280,7 @@ extension ProfileAndEventsViewController : UITableViewDelegate{
             profileImageHeightConstrant.constant = maxProfileImageHeightConstrant - closeAmount
             profileImageWidthConstrant.constant = maxProfileImageWidthConstrant - closeAmount
             profileImageShadow.layer.opacity = 1
-
+            
         }
         else if(closeAmount >= maxProfileImageHeightConstrant)
         {
@@ -270,10 +291,9 @@ extension ProfileAndEventsViewController : UITableViewDelegate{
         
     }
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        
         return true
     }
-
+    
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         
