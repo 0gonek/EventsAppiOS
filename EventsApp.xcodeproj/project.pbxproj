@@ -32,6 +32,8 @@
 		8A7941762048C08A0097934E /* mapStyle.json in Resources */ = {isa = PBXBuildFile; fileRef = 8A7941752048C0890097934E /* mapStyle.json */; };
 		8A79417A2048CB1E0097934E /* MapEventsDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7941792048CB1E0097934E /* MapEventsDTO.swift */; };
 		8A7BF7D5204A37EF00F175DD /* SingleEventMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7BF7D4204A37EF00F175DD /* SingleEventMap.swift */; };
+		8A7BF7D7204A52D000F175DD /* EditEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7BF7D6204A52D000F175DD /* EditEventViewController.swift */; };
+		8A7BF7D9204A532100F175DD /* ChangeEventDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7BF7D8204A532100F175DD /* ChangeEventDTO.swift */; };
 		8A7CD1602040A94500D4C113 /* SmallEventDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7CD15F2040A94500D4C113 /* SmallEventDTO.swift */; };
 		8A7CD1622040AB8900D4C113 /* LoginDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7CD1612040AB8900D4C113 /* LoginDTO.swift */; };
 		8A7CD1642040B60100D4C113 /* MapEventDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7CD1632040B60100D4C113 /* MapEventDTO.swift */; };
@@ -73,6 +75,8 @@
 		8A7941752048C0890097934E /* mapStyle.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mapStyle.json; sourceTree = "<group>"; };
 		8A7941792048CB1E0097934E /* MapEventsDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapEventsDTO.swift; sourceTree = "<group>"; };
 		8A7BF7D4204A37EF00F175DD /* SingleEventMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleEventMap.swift; sourceTree = "<group>"; };
+		8A7BF7D6204A52D000F175DD /* EditEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEventViewController.swift; sourceTree = "<group>"; };
+		8A7BF7D8204A532100F175DD /* ChangeEventDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeEventDTO.swift; sourceTree = "<group>"; };
 		8A7CD15F2040A94500D4C113 /* SmallEventDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallEventDTO.swift; sourceTree = "<group>"; };
 		8A7CD1612040AB8900D4C113 /* LoginDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDTO.swift; sourceTree = "<group>"; };
 		8A7CD1632040B60100D4C113 /* MapEventDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapEventDTO.swift; sourceTree = "<group>"; };
@@ -158,8 +162,9 @@
 				8A5FE9C92044F3EE00B87BB2 /* TabBarController.swift */,
 				8A15949F20463205009A0688 /* EventBigController.swift */,
 				8A6AAD8B2047FEE900624479 /* ParticipantsController.swift */,
-				8AE90C8E2049AABF00630A0E /* AddEventViewController.swift */,
 				8A7BF7D4204A37EF00F175DD /* SingleEventMap.swift */,
+				8A7BF7D6204A52D000F175DD /* EditEventViewController.swift */,
+				8AE90C8E2049AABF00630A0E /* AddEventViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -188,6 +193,7 @@
 				8A7941792048CB1E0097934E /* MapEventsDTO.swift */,
 				8A5FE9CD2045841500B87BB2 /* BigEventDTO.swift */,
 				8AE90C992049E68B00630A0E /* NewEventDTO.swift */,
+				8A7BF7D8204A532100F175DD /* ChangeEventDTO.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -362,10 +368,12 @@
 			files = (
 				8A3AD525203E3AA700BAFB9D /* Error.swift in Sources */,
 				8A6AAD8C2047FEE900624479 /* ParticipantsController.swift in Sources */,
+				8A7BF7D9204A532100F175DD /* ChangeEventDTO.swift in Sources */,
 				8A5FE9CE2045841500B87BB2 /* BigEventDTO.swift in Sources */,
 				8A7CD1622040AB8900D4C113 /* LoginDTO.swift in Sources */,
 				8A124A27202B54B8002E9800 /* GroupsViewController.swift in Sources */,
 				8A7BF7D5204A37EF00F175DD /* SingleEventMap.swift in Sources */,
+				8A7BF7D7204A52D000F175DD /* EditEventViewController.swift in Sources */,
 				8AE90C9A2049E68B00630A0E /* NewEventDTO.swift in Sources */,
 				8AE90C922049CC8000630A0E /* ImagePickerController.swift in Sources */,
 				8A6AAD8E204838A900624479 /* LoginsDTO.swift in Sources */,

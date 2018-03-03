@@ -106,7 +106,9 @@ class EventBigController : UIViewController
     }
     @objc func editTapped(_ sender: UIBarButtonItem)
     {
-        
+        let kek = EditEventViewController() as! EditEventViewController
+        kek.currentEvent = currentEvent
+        self.navigationController?.pushViewController(kek, animated: true)
     }
     @objc func goTapped(_ sender: UIBarButtonItem)
     {

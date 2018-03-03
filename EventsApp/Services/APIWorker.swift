@@ -37,11 +37,14 @@ final class APIWorker {
             ])
         if let temp = Mapper<SmallEventsDTO>().map(JSONObject: responce.json)
         {
-            return temp.eventsArray!
+            if(temp.eventsArray != nil)
+            {
+                return temp.eventsArray!
+            }
         }
-        else {
-            return [SmallEventDTO]()
-        }
+        
+        return [SmallEventDTO]()
+        
     }
     
     class func getUpcomingSmallEvents() -> [SmallEventDTO]{
@@ -111,7 +114,7 @@ final class APIWorker {
             return [LoginDTO]()
         }
     }
-
+    
     
     
     public class func getMapEvents(minLat: Double,minLon: Double, maxLat:Double, maxLon: Double) -> [MapEventDTO]
@@ -147,12 +150,15 @@ final class APIWorker {
                     ])
             if let temp = Mapper<MapEventsDTO>().map(JSONObject: responce.json)
             {
-                return temp.eventsList!
+                if(temp.eventsList != nil)
+                {
+                    return temp.eventsList!
+                }
+                
             }
-            else
-            {
-                return [MapEventDTO]()
-            }
+            
+            return [MapEventDTO]()
+            
         }
     }
     
@@ -163,7 +169,7 @@ final class APIWorker {
                 "id": Int64(UserDefaults.standard.string(forKey: defaultsKeys.serverId)!)!,
                 "token": UserDefaults.standard.string(forKey: defaultsKeys.token)!,
                 "event_id": eventId
-                ])
+            ])
         if(responce.ok)
         {
             return responce.text!.compare("true").rawValue == 0
@@ -197,22 +203,38 @@ final class APIWorker {
     {
         event.groupId = 0
         let jsonstring = event.toJSON()
-        
-        //let jsonData = try? JSONSerialization.data(withJSONObject: json)
-        //let responce = Just.get(connectionUrl+"events/new_a", params: json)
-        //let str = responce.text
         let url = connectionUrl + "events/new"
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
-        ]
+            ]
         
         let response = Alamofire.request(url, method: .post, parameters: jsonstring, encoding: JSONEncoding.default, headers: headers).responseJSON()
         
         if let json = response.result.value {
             return json as! Int64
         }
-
+        
         return -1
+    }
+    
+    public class func changeEvent(_ event: ChangeEventDTO) -> Bool
+    {
+        let jsonstring = event.toJSON()
+        let url = connectionUrl + "events/change"
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json",
+            ]
+        
+        let response = Alamofire.request(url, method: .post, parameters: jsonstring, encoding: JSONEncoding.default, headers: headers).responseJSON()
+        var er = response.result
+        var t = er.error
+        
+        if let json = response.result.value {
+            return json as! Bool
+            print(er.error)
+        }
+        
+        return false
     }
     private func nullToNil(value : AnyObject?) -> AnyObject? {
         if value is NSNull {

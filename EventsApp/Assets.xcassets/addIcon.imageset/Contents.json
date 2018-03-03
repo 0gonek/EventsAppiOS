@@ -4,6 +4,14 @@
       "idiom" : "universal",
       "filename" : "if_icon-42-note-add_315164.png",
       "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
     }
   ],
   "info" : {

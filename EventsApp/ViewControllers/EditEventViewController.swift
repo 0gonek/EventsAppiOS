@@ -1,8 +1,8 @@
 //
-//  AddEventViewController.swift
+//  EditEventViewController.swift
 //  EventsApp
 //
-//  Created by Alexey on 02.03.2018.
+//  Created by Alexey on 03.03.2018.
 //  Copyright © 2018 HSE. All rights reserved.
 //
 
@@ -10,32 +10,34 @@ import Foundation
 import Eureka
 import LocationPicker
 
-class AddEventViewController : FormViewController
+class EditEventViewController : FormViewController
 {
-    var chosenLocation: Location? = nil
+    var currentEvent: BigEventDTO?
+    var chosenLocation : Location?
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
         form +++ Section("General")
-            <<< TextRow(){ row in
-                row.title = "Name"
-                row.placeholder = "Enter text here"
-                row.add(rule: RuleRequired())
-                row.validationOptions = .validatesOnChangeAfterBlurred
-                row.tag = "name"
-            }
-                .cellUpdate { cell, row in
-                    if !row.isValid {
-                        cell.titleLabel?.textColor = .red
-                    }
-            }
+
             <<< TextRow(){ row in
                 row.title = "Description"
                 row.placeholder = "Enter text here"
                 row.tag = "description"
+                row.value = currentEvent?.description
                 row.add(rule: RuleRequired())
                 row.validationOptions = .validatesOnChangeAfterBlurred
-            }.cellUpdate { cell, row in
+                }.cellUpdate { cell, row in
                     if !row.isValid {
                         cell.titleLabel?.textColor = .red
                     }
@@ -50,8 +52,9 @@ class AddEventViewController : FormViewController
             <<< SwitchRow(){ row in
                 row.title = "Private"
                 row.tag = "private"
-                row.value = false
+                row.value = currentEvent?.privacy
             }
+            
             +++ Section("Start")
             <<< DateRow(){
                 $0.title = "Start Date"
@@ -69,10 +72,10 @@ class AddEventViewController : FormViewController
                 $0.value = NSDate() as Date
                 $0.tag = "startTime"
             }
-
-
+            
+            
             +++ Section("Finish")
-
+            
             <<< DateRow(){
                 $0.title = "Finish Date"
                 $0.value = Date()
@@ -87,11 +90,11 @@ class AddEventViewController : FormViewController
                 $0.value = NSDate() as Date
                 $0.tag = "finishTime"
             }
-
+            
             +++ Section("Location")
             <<< ButtonRow() {btn in
                 btn.title = "Pick location"
-            }
+                }
                 .onCellSelection { [weak self] (cell, row) in
                     
                     let locationPicker = LocationPickerViewController()
@@ -104,7 +107,7 @@ class AddEventViewController : FormViewController
                     locationPicker.searchHistoryLabel = "Previously searched"
                     
                     locationPicker.resultRegionDistance = 400
-
+                    
                     locationPicker.completion = { location in
                         self?.chosenLocation = location
                         row.title = location?.address
@@ -117,11 +120,10 @@ class AddEventViewController : FormViewController
                 btn.title = "Finish"
                 }
                 .onCellSelection { [weak self] (cell, row) in
-                    let row: TextRow? = self?.form.rowBy(tag: "name")
                     let row2: TextRow? = self?.form.rowBy(tag: "description")
                     let row3: ImageRow? = self?.form.rowBy(tag: "image")
                     
-                    if(!(row?.isValid)! || !(row2?.isValid)!){
+                    if(!(row2?.isValid)!){
                         let alert = UIAlertController(title: "Alert", message: "You must fill the red fields", preferredStyle: UIAlertControllerStyle.alert)
                         alert.addAction(UIAlertAction(title: "Oh, I see... (OK)", style: UIAlertActionStyle.default, handler: nil))
                         self?.present(alert, animated: true, completion: nil)
@@ -132,11 +134,10 @@ class AddEventViewController : FormViewController
                         return
                     }
                     
-
                     let valuesDictionary = self?.form.values()
                     
                     let startDate: Int64 = (valuesDictionary!["startDate"] as! Date).millisecondsSince1970
-                    let finishDate: Int64 = (valuesDictionary!["finishDate"] as! Date).millisecondsSince1970 
+                    let finishDate: Int64 = (valuesDictionary!["finishDate"] as! Date).millisecondsSince1970
                     let imgData : [UInt8]
                     if(row3?.value != nil)
                     {
@@ -160,7 +161,7 @@ class AddEventViewController : FormViewController
                         return
                     }
                     
-                    let kek = NewEventDTO(name: valuesDictionary!["name"] as? String,
+                    let kek = ChangeEventDTO(
                                           ownerId: Int64(UserDefaults.standard.string(forKey: defaultsKeys.serverId)!),
                                           token: UserDefaults.standard.string(forKey: defaultsKeys.token)!,
                                           latitude: self?.chosenLocation?.coordinate.latitude,
@@ -170,11 +171,11 @@ class AddEventViewController : FormViewController
                                           privacy: valuesDictionary!["private"] as? Bool,
                                           description: valuesDictionary!["description"] as? String,
                                           picture: imgData,
-                                          type: 0,
-                                          groupId: nil
-                                          )
-                    let temp = APIWorker.addEvent(kek)
-                    if(temp != -1)
+                                          id: (self?.currentEvent?.id)!
+                        
+                    )
+                    let temp = APIWorker.changeEvent(kek)
+                    if(temp)
                     {
                         self?.navigationController?.popViewController(animated: true)
                     }
@@ -182,22 +183,8 @@ class AddEventViewController : FormViewController
                     {
                         
                     }
-                }
+        }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
