@@ -41,7 +41,7 @@ class MapViewController: UIViewController {
     }
     private func setMap()
     {
-        let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: 3)
+        let camera = GMSCameraPosition.camera(withLatitude: 35.0, longitude: 57.0, zoom: 3)
         let mapView = GMSMapView.map(withFrame: .zero, camera: camera)
         
         mapView.isMyLocationEnabled = true

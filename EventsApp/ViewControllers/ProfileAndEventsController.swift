@@ -25,6 +25,7 @@ class ProfileAndEventsViewController : UIViewController{
     @IBOutlet weak var profileImageHeightConstrant: NSLayoutConstraint!
     @IBOutlet weak var profileImageWidthConstrant: NSLayoutConstraint!
     
+    @IBOutlet weak var btnAddEvent: UIButton!
     
     @IBAction func segmentedControlIndexChanged(_ sender: UISegmentedControl) {
         switch segmentedControl.selectedSegmentIndex
@@ -42,6 +43,11 @@ class ProfileAndEventsViewController : UIViewController{
             eventsList = APIWorker.getMySmallEvents()
             tableView.reloadData()
         }
+    }
+    @IBAction func btnAddClicked(_ sender: UIButton)
+    {
+        let addViewController = AddEventViewController()
+        self.navigationController?.pushViewController(addViewController, animated: true)
     }
     
     let maxHeaderHeight: CGFloat = 220
@@ -61,7 +67,6 @@ class ProfileAndEventsViewController : UIViewController{
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
         let user = getUserDTO()
         textName.text = user.name
         if let avatar = user.avatar

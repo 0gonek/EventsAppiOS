@@ -2,7 +2,9 @@ import Foundation
 import SwiftyVK
 import Just
 import ObjectMapper
-
+import Alamofire
+import Alamofire_Synchronous
+import UIKit
 final class APIWorker {
     
     private static let connectionUrl = "http://13.74.42.169:8080/"
@@ -109,6 +111,8 @@ final class APIWorker {
             return [LoginDTO]()
         }
     }
+
+    
     
     public class func getMapEvents(minLat: Double,minLon: Double, maxLat:Double, maxLon: Double) -> [MapEventDTO]
     {
@@ -186,6 +190,35 @@ final class APIWorker {
         else
         {
             return false
+        }
+    }
+    
+    public class func addEvent(_ event : NewEventDTO) -> Int64
+    {
+        event.groupId = 0
+        let jsonstring = event.toJSON()
+        
+        //let jsonData = try? JSONSerialization.data(withJSONObject: json)
+        //let responce = Just.get(connectionUrl+"events/new_a", params: json)
+        //let str = responce.text
+        let url = connectionUrl + "events/new"
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json",
+        ]
+        
+        let response = Alamofire.request(url, method: .post, parameters: jsonstring, encoding: JSONEncoding.default, headers: headers).responseJSON()
+        
+        if let json = response.result.value {
+            return json as! Int64
+        }
+
+        return -1
+    }
+    private func nullToNil(value : AnyObject?) -> AnyObject? {
+        if value is NSNull {
+            return nil
+        } else {
+            return value
         }
     }
 }

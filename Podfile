@@ -9,4 +9,10 @@ pod 'SwiftyVK'
 pod 'Just'
 pod 'ObjectMapper', '~> 3.1'
   use_frameworks!
+  
+pod 'Eureka'
+pod 'DateTimePicker'
+pod 'LocationPicker'
+pod 'Alamofire', '~> 4.6'
+pod 'Alamofire-Synchronous', '~> 4.0'
 end

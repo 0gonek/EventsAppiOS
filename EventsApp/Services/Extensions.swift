@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Eureka
 
 extension UIImageView {
     
@@ -71,3 +72,5 @@ extension UIApplication {
         return controller
     }
 }
+
+

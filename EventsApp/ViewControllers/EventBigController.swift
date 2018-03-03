@@ -24,6 +24,13 @@ class EventBigController : UIViewController
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var eventInfoView: UIView!
     
+    @IBOutlet weak var btnShowOnMap: UIButton!
+    
+    @IBAction func btnShowOnMapClick(_ sender: UIButton) {
+        let kek = self.storyboard?.instantiateViewController(withIdentifier: "singleEventMap") as! SingleEventMapViewController
+        kek.currentEvent = currentEvent
+        self.navigationController?.pushViewController(kek, animated: true)
+    }
     @IBOutlet weak var scrollViewHeightConstraint: NSLayoutConstraint!
     
     
@@ -38,7 +45,20 @@ class EventBigController : UIViewController
         txtName.sizeToFit()
         btnParticipants.sizeToFit()
         txtDescription.sizeToFit()
-        
+        if let avatar = currentEvent.pathToThePicture
+        {
+            if let url = URL(string: "http://13.74.42.169:8080/events/get_picture?path=" + avatar)
+            {
+                do{
+                    let data = try Data(contentsOf: url)
+                    imgEvent.image = UIImage(data: data)
+                }
+                catch
+                {
+                    
+                }
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -42,7 +42,7 @@ class BigEventDTO : Mappable
         duration <- map["duration"]
         privacy <- map["privacy"]
         description <- map["description"]
-        pathToThePicture <- map["pathToThePucture"]
+        pathToThePicture <- map["pathToThePicture"]
         type <- map["type"]
         participants <- map["participants"]
         groupId <- map["groupId"]

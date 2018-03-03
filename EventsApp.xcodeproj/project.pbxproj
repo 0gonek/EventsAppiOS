@@ -23,7 +23,6 @@
 		8A3AD527203E443200BAFB9D /* ProfileTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3AD526203E443200BAFB9D /* ProfileTabController.swift */; };
 		8A3AD529203F78EC00BAFB9D /* ProfileAndEventsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3AD528203F78EC00BAFB9D /* ProfileAndEventsController.swift */; };
 		8A52613B202A84AB00A0AA2F /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 8A52613A202A84AB00A0AA2F /* Podfile */; };
-		8A5CACCD20497C2700902497 /* AddEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5CACCC20497C2700902497 /* AddEventViewController.swift */; };
 		8A5FE9C82042E78100B87BB2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5FE9C72042E78100B87BB2 /* Extensions.swift */; };
 		8A5FE9CA2044F3EE00B87BB2 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5FE9C92044F3EE00B87BB2 /* TabBarController.swift */; };
 		8A5FE9CE2045841500B87BB2 /* BigEventDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A5FE9CD2045841500B87BB2 /* BigEventDTO.swift */; };
@@ -32,9 +31,14 @@
 		8A6AAD8E204838A900624479 /* LoginsDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6AAD8D204838A800624479 /* LoginsDTO.swift */; };
 		8A7941762048C08A0097934E /* mapStyle.json in Resources */ = {isa = PBXBuildFile; fileRef = 8A7941752048C0890097934E /* mapStyle.json */; };
 		8A79417A2048CB1E0097934E /* MapEventsDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7941792048CB1E0097934E /* MapEventsDTO.swift */; };
+		8A7BF7D5204A37EF00F175DD /* SingleEventMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7BF7D4204A37EF00F175DD /* SingleEventMap.swift */; };
 		8A7CD1602040A94500D4C113 /* SmallEventDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7CD15F2040A94500D4C113 /* SmallEventDTO.swift */; };
 		8A7CD1622040AB8900D4C113 /* LoginDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7CD1612040AB8900D4C113 /* LoginDTO.swift */; };
 		8A7CD1642040B60100D4C113 /* MapEventDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7CD1632040B60100D4C113 /* MapEventDTO.swift */; };
+		8AE90C8F2049AABF00630A0E /* AddEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE90C8E2049AABF00630A0E /* AddEventViewController.swift */; };
+		8AE90C922049CC8000630A0E /* ImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE90C912049CC8000630A0E /* ImagePickerController.swift */; };
+		8AE90C942049CC8900630A0E /* ImageRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE90C932049CC8900630A0E /* ImageRow.swift */; };
+		8AE90C9A2049E68B00630A0E /* NewEventDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE90C992049E68B00630A0E /* NewEventDTO.swift */; };
 		FD9961C3C15F38A890BC0C9E /* Pods_EventsApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2050D2A1E945736434EAC7CF /* Pods_EventsApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -60,7 +64,6 @@
 		8A3AD526203E443200BAFB9D /* ProfileTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTabController.swift; sourceTree = "<group>"; };
 		8A3AD528203F78EC00BAFB9D /* ProfileAndEventsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAndEventsController.swift; sourceTree = "<group>"; };
 		8A52613A202A84AB00A0AA2F /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		8A5CACCC20497C2700902497 /* AddEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventViewController.swift; sourceTree = "<group>"; };
 		8A5FE9C72042E78100B87BB2 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		8A5FE9C92044F3EE00B87BB2 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		8A5FE9CD2045841500B87BB2 /* BigEventDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigEventDTO.swift; sourceTree = "<group>"; };
@@ -69,9 +72,14 @@
 		8A6AAD8D204838A800624479 /* LoginsDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginsDTO.swift; sourceTree = "<group>"; };
 		8A7941752048C0890097934E /* mapStyle.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mapStyle.json; sourceTree = "<group>"; };
 		8A7941792048CB1E0097934E /* MapEventsDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapEventsDTO.swift; sourceTree = "<group>"; };
+		8A7BF7D4204A37EF00F175DD /* SingleEventMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleEventMap.swift; sourceTree = "<group>"; };
 		8A7CD15F2040A94500D4C113 /* SmallEventDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallEventDTO.swift; sourceTree = "<group>"; };
 		8A7CD1612040AB8900D4C113 /* LoginDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDTO.swift; sourceTree = "<group>"; };
 		8A7CD1632040B60100D4C113 /* MapEventDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapEventDTO.swift; sourceTree = "<group>"; };
+		8AE90C8E2049AABF00630A0E /* AddEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventViewController.swift; sourceTree = "<group>"; };
+		8AE90C912049CC8000630A0E /* ImagePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerController.swift; sourceTree = "<group>"; };
+		8AE90C932049CC8900630A0E /* ImageRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageRow.swift; sourceTree = "<group>"; };
+		8AE90C992049E68B00630A0E /* NewEventDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEventDTO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,7 +158,8 @@
 				8A5FE9C92044F3EE00B87BB2 /* TabBarController.swift */,
 				8A15949F20463205009A0688 /* EventBigController.swift */,
 				8A6AAD8B2047FEE900624479 /* ParticipantsController.swift */,
-				8A5CACCC20497C2700902497 /* AddEventViewController.swift */,
+				8AE90C8E2049AABF00630A0E /* AddEventViewController.swift */,
+				8A7BF7D4204A37EF00F175DD /* SingleEventMap.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -161,7 +170,9 @@
 				8A3AD5182036316300BAFB9D /* VKDelegate.swift */,
 				8A3AD51A20364D3200BAFB9D /* APIWorker.swift */,
 				8A3AD524203E3AA700BAFB9D /* Error.swift */,
+				8AE90C912049CC8000630A0E /* ImagePickerController.swift */,
 				8A5FE9C72042E78100B87BB2 /* Extensions.swift */,
+				8AE90C932049CC8900630A0E /* ImageRow.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -176,6 +187,7 @@
 				8A7CD1632040B60100D4C113 /* MapEventDTO.swift */,
 				8A7941792048CB1E0097934E /* MapEventsDTO.swift */,
 				8A5FE9CD2045841500B87BB2 /* BigEventDTO.swift */,
+				8AE90C992049E68B00630A0E /* NewEventDTO.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -318,12 +330,22 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-EventsApp/Pods-EventsApp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire-Synchronous/Alamofire_Synchronous.framework",
+				"${BUILT_PRODUCTS_DIR}/DateTimePicker/DateTimePicker.framework",
+				"${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework",
 				"${BUILT_PRODUCTS_DIR}/Just/Just.framework",
+				"${BUILT_PRODUCTS_DIR}/LocationPicker/LocationPicker.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire_Synchronous.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DateTimePicker.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Eureka.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Just.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LocationPicker.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -343,9 +365,12 @@
 				8A5FE9CE2045841500B87BB2 /* BigEventDTO.swift in Sources */,
 				8A7CD1622040AB8900D4C113 /* LoginDTO.swift in Sources */,
 				8A124A27202B54B8002E9800 /* GroupsViewController.swift in Sources */,
+				8A7BF7D5204A37EF00F175DD /* SingleEventMap.swift in Sources */,
+				8AE90C9A2049E68B00630A0E /* NewEventDTO.swift in Sources */,
+				8AE90C922049CC8000630A0E /* ImagePickerController.swift in Sources */,
 				8A6AAD8E204838A900624479 /* LoginsDTO.swift in Sources */,
 				8A5FE9CA2044F3EE00B87BB2 /* TabBarController.swift in Sources */,
-				8A5CACCD20497C2700902497 /* AddEventViewController.swift in Sources */,
+				8AE90C8F2049AABF00630A0E /* AddEventViewController.swift in Sources */,
 				8A193B70202A62BE00E6E276 /* LoginViewController.swift in Sources */,
 				8A3AD5192036316300BAFB9D /* VKDelegate.swift in Sources */,
 				8A3AD529203F78EC00BAFB9D /* ProfileAndEventsController.swift in Sources */,
@@ -357,6 +382,7 @@
 				8A1594A3204726ED009A0688 /* CellToEventSegue.swift in Sources */,
 				8A3AD527203E443200BAFB9D /* ProfileTabController.swift in Sources */,
 				8A193B6E202A62BE00E6E276 /* MapViewController.swift in Sources */,
+				8AE90C942049CC8900630A0E /* ImageRow.swift in Sources */,
 				8A5FE9D020460BF000B87BB2 /* SmallEventsDTO.swift in Sources */,
 				8A1594A020463205009A0688 /* EventBigController.swift in Sources */,
 				8A7CD1642040B60100D4C113 /* MapEventDTO.swift in Sources */,
