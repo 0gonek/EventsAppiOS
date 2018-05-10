@@ -14,10 +14,13 @@ class ParticipantsController : UIViewController{
     @IBOutlet weak var tableView: UITableView!
     
     var peopleList: [LoginDTO] = [LoginDTO]()
-    
+    var eventId : Int64 = -1
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.reloadData()
+        APIWorker.getEventParticipants(eventId){result in
+            self.peopleList = result ?? []
+            self.tableView.reloadData()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,17 +53,8 @@ extension ParticipantsController : UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "personCell") as! PersonCell
         cell.txtName.text = peopleList[indexPath.row].name
-        if let url = URL(string: peopleList[indexPath.row].avatar!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
-        {
-            do{
-                let data = try Data(contentsOf: url)
-                cell.imgPerson.image = UIImage(data: data)
-            }
-            catch
-            {
-                
-            }
-        }
+        cell.imgPerson.loadImage(urlString: peopleList[indexPath.row].avatar!)
+        cell.imgPerson.setRounded()
         cell.imgPerson.setRounded()
         return cell
     }

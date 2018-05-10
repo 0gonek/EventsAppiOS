@@ -9,11 +9,30 @@
 import Foundation
 import Eureka
 import LocationPicker
+import JGProgressHUD
 
 class AddEventViewController : FormViewController
 {
     var chosenLocation: Location? = nil
-    
+    var hud : JGProgressHUD?
+    private func showAlert(msg: String)
+    {
+        let alert = UIAlertController(title: "Error", message: msg, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Ok, i'll fix", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    private func showHud(){
+        hud = JGProgressHUD(style: .light)
+        hud!.textLabel.text = "Loading"
+        hud!.show(in: self.view)
+    }
+    private func hideHud(){
+        if hud != nil
+        {
+            hud?.dismiss(afterDelay: 1.0)
+        }
+        hud = nil;
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         form +++ Section("General")
@@ -23,7 +42,7 @@ class AddEventViewController : FormViewController
                 row.add(rule: RuleRequired())
                 row.validationOptions = .validatesOnChangeAfterBlurred
                 row.tag = "name"
-            }
+                }
                 .cellUpdate { cell, row in
                     if !row.isValid {
                         cell.titleLabel?.textColor = .red
@@ -35,7 +54,7 @@ class AddEventViewController : FormViewController
                 row.tag = "description"
                 row.add(rule: RuleRequired())
                 row.validationOptions = .validatesOnChangeAfterBlurred
-            }.cellUpdate { cell, row in
+                }.cellUpdate { cell, row in
                     if !row.isValid {
                         cell.titleLabel?.textColor = .red
                     }
@@ -69,10 +88,10 @@ class AddEventViewController : FormViewController
                 $0.value = NSDate() as Date
                 $0.tag = "startTime"
             }
-
-
+            
+            
             +++ Section("Finish")
-
+            
             <<< DateRow(){
                 $0.title = "Finish Date"
                 $0.value = Date()
@@ -87,11 +106,11 @@ class AddEventViewController : FormViewController
                 $0.value = NSDate() as Date
                 $0.tag = "finishTime"
             }
-
+            
             +++ Section("Location")
             <<< ButtonRow() {btn in
                 btn.title = "Pick location"
-            }
+                }
                 .onCellSelection { [weak self] (cell, row) in
                     
                     let locationPicker = LocationPickerViewController()
@@ -104,7 +123,7 @@ class AddEventViewController : FormViewController
                     locationPicker.searchHistoryLabel = "Previously searched"
                     
                     locationPicker.resultRegionDistance = 400
-
+                    
                     locationPicker.completion = { location in
                         self?.chosenLocation = location
                         row.title = location?.address
@@ -117,26 +136,51 @@ class AddEventViewController : FormViewController
                 btn.title = "Finish"
                 }
                 .onCellSelection { [weak self] (cell, row) in
-                    let row: TextRow? = self?.form.rowBy(tag: "name")
+                    let row1: TextRow? = self?.form.rowBy(tag: "name")
                     let row2: TextRow? = self?.form.rowBy(tag: "description")
                     let row3: ImageRow? = self?.form.rowBy(tag: "image")
                     
-                    if(!(row?.isValid)! || !(row2?.isValid)!){
-                        let alert = UIAlertController(title: "Alert", message: "You must fill the red fields", preferredStyle: UIAlertControllerStyle.alert)
-                        alert.addAction(UIAlertAction(title: "Oh, I see... (OK)", style: UIAlertActionStyle.default, handler: nil))
-                        self?.present(alert, animated: true, completion: nil)
+                    if(!(row1?.isValid)!){
+                        self!.showAlert(msg: "Name must be specified")
+                        return
+                    }
+                    if(!(row2?.isValid)!){
+                        self?.showAlert(msg: "Description must be specified")
                         return
                     }
                     if(self?.chosenLocation == nil)
                     {
+                        self!.showAlert(msg: "Location must be selected")
                         return
                     }
                     
-
-                    let valuesDictionary = self?.form.values()
                     
-                    let startDate: Int64 = (valuesDictionary!["startDate"] as! Date).millisecondsSince1970
-                    let finishDate: Int64 = (valuesDictionary!["finishDate"] as! Date).millisecondsSince1970 
+                    let valuesDictionary = self?.form.values()
+                    let calendar = Calendar.current
+                    
+                    let startTime = (valuesDictionary!["startTime"] as! Date)
+                    let finishTime = (valuesDictionary!["finishTime"] as! Date)
+                    
+                    let startHour : Int64 = Int64(calendar.component(.hour, from: startTime))
+                    let startMinutes : Int64 = Int64(calendar.component(.minute, from: startTime))
+                    let finishHour : Int64 = Int64(calendar.component(.hour, from: finishTime))
+                    let finishMinutes : Int64 = Int64(calendar.component(.minute, from: finishTime))
+                    
+                    let startDate: Int64 = (valuesDictionary!["startDate"] as! Date).millisecondsSince1970 + startHour * Int64(360000) + startMinutes * Int64(60000)
+                    let finishDate: Int64 = (valuesDictionary!["finishDate"] as! Date).millisecondsSince1970 + finishHour * Int64(360000) + finishMinutes * Int64(60000)
+                    
+                    if(startDate < Date().millisecondsSince1970)
+                    {
+                        self!.showAlert(msg: "You can not create event in past")
+                        return
+                    }
+                    if(startDate >= finishDate)
+                    {
+                        self!.showAlert(msg: "Finish time must be later than start time")
+                        return
+                    }
+                    
+                    self!.showHud()
                     let imgData : [UInt8]
                     if(row3?.value != nil)
                     {
@@ -145,19 +189,6 @@ class AddEventViewController : FormViewController
                     else
                     {
                         imgData = [UInt8]()
-                    }
-                    
-                    if(startDate < Date().millisecondsSince1970)
-                    {
-                        let alert = UIAlertController(title: "Alert", message: "You can not create event in past, sorry :(", preferredStyle: UIAlertControllerStyle.alert)
-                        alert.addAction(UIAlertAction(title: "Oh, I see... (OK)", style: UIAlertActionStyle.default, handler: nil))
-                        return
-                    }
-                    if(startDate >= finishDate)
-                    {
-                        let alert = UIAlertController(title: "Alert", message: "The finish time can not be more than start time", preferredStyle: UIAlertControllerStyle.alert)
-                        alert.addAction(UIAlertAction(title: "Oh, I see... (OK)", style: UIAlertActionStyle.default, handler: nil))
-                        return
                     }
                     
                     let kek = NewEventDTO(name: valuesDictionary!["name"] as? String,
@@ -172,17 +203,19 @@ class AddEventViewController : FormViewController
                                           picture: imgData,
                                           type: 0,
                                           groupId: nil
-                                          )
-                    let temp = APIWorker.addEvent(kek)
-                    if(temp != -1)
-                    {
-                        self?.navigationController?.popViewController(animated: true)
+                    )
+                    APIWorker.addEvent(kek){ result in
+                        self!.hideHud()
+                        if(result != -1)
+                        {
+                            self?.navigationController?.popViewController(animated: true)
+                        }
+                        else
+                        {
+                            self?.showAlert(msg: "Internal server error")
+                        }
                     }
-                    else
-                    {
-                        
-                    }
-                }
+        }
     }
 }
 

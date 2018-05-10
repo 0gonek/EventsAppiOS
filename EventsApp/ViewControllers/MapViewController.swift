@@ -22,12 +22,12 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
         setMap()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
@@ -63,42 +63,50 @@ class MapViewController: UIViewController {
 
 extension MapViewController: GMSMapViewDelegate
 {
-    func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
+    func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
+        mapView.clear()
         let projection = mapView.projection.visibleRegion()
-        
         let topLeftCorner: CLLocationCoordinate2D = projection.farLeft
         let bottomRightCorner: CLLocationCoordinate2D = projection.nearRight
-        eventsList = APIWorker.getMapEvents(minLat:
+        APIWorker.getMapEvents(minLat:
             bottomRightCorner.latitude < topLeftCorner.latitude ? bottomRightCorner.latitude: topLeftCorner.latitude,
-                                            minLon:
+                               minLon:
             bottomRightCorner.longitude < topLeftCorner.longitude ? bottomRightCorner.longitude : topLeftCorner.longitude,
-                                            maxLat:
+                               maxLat:
             topLeftCorner.latitude > bottomRightCorner.latitude ? topLeftCorner.latitude : bottomRightCorner.latitude,
-                                            maxLon:
-            topLeftCorner.longitude > bottomRightCorner.longitude ? topLeftCorner.longitude : bottomRightCorner.longitude)
-        for event in eventsList!
-        {
-            let marker = GMSMarker()
-            marker.position = CLLocationCoordinate2D(latitude: event.latitude!, longitude: event.longtitude!)
-            marker.title = "Title"
-            marker.snippet = "Snippet"
-            marker.icon = UIImage(named: "mapMarker")
-            marker.map = mapView
-            marker.userData = event.id
-            marker.tracksViewChanges = true
+                               maxLon:
+        topLeftCorner.longitude > bottomRightCorner.longitude ? topLeftCorner.longitude : bottomRightCorner.longitude){ result in
+            self.eventsList = result ?? []
+            for event in self.eventsList!
+            {
+                let marker = GMSMarker()
+                marker.position = CLLocationCoordinate2D(latitude: event.latitude!, longitude: event.longtitude!)
+                marker.title = "Title"
+                marker.snippet = "Snippet"
+                marker.icon = UIImage(named: "mapMarker")
+                marker.map = mapView
+                marker.userData = event.id
+                marker.tracksViewChanges = true
+            }
         }
     }
+    
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker)
     {
         let kek = self.storyboard?.instantiateViewController(withIdentifier: "EventBigController") as! EventBigController
-        kek.currentEvent = APIWorker.getEventInfo(marker.userData as! Int64)
+        kek.currentEventId = marker.userData as! Int64
         self.navigationController?.pushViewController(kek, animated: true)
     }
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-        let event: BigEventDTO = APIWorker.getEventInfo(marker.userData as! Int64)
-        marker.title = event.name
-        marker.snippet = event.description
+        
+        APIWorker.getEventInfo(marker.userData as! Int64){event in
+            if event != nil
+            {
+                marker.title = event!.name
+                marker.snippet = event!.description
+            }
+        }
         return false
     }
 }

@@ -12,7 +12,7 @@ import ObjectMapper
 class SmallEventsDTO: Mappable{
     
     var eventsArray: [SmallEventDTO]?
-    
+
     required init?(map: Map) {
     }
     

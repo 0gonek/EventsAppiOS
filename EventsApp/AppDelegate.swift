@@ -27,23 +27,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSPlacesClient.provideAPIKey("AIzaSyBu7ecpHo8t79Nr_mtHNA--jLlY4aFIhJY")
         vkDelegateReference = VKDelegate()
         VK.setUp(appId: "6219519", delegate: vkDelegateReference!)
-        do{
-            try (vkDelegateReference as! VKDelegate).silentLogin()
-        }
-        catch
-        {
-            let message : String
-            if error is AppError
-            {
-                message = (error as! AppError).getMessage()
-            }
-            else{
-                message = "Internal error occured: " + error.localizedDescription
-            }
-            let alert = UIAlertController(title: "Success", message: message, preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.default, handler: nil))
-            self.inputViewController?.present(alert, animated: true, completion: nil)
-        }
+        (vkDelegateReference as! VKDelegate).silentLogin()
+//        do{
+//            try (vkDelegateReference as! VKDelegate).silentLogin()
+//        }
+//        catch
+//        {
+//            let message : String
+//            if error is AppError
+//            {
+//                message = (error as! AppError).getMessage()
+//            }
+//            else{
+//                message = "Internal error occured: " + error.localizedDescription
+//            }
+//            let alert = UIAlertController(title: "Success", message: message, preferredStyle: UIAlertControllerStyle.alert)
+//            alert.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.default, handler: nil))
+//            self.inputViewController?.present(alert, animated: true, completion: nil)
+//        }
         return true
     }
     

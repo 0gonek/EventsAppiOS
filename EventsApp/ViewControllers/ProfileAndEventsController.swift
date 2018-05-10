@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import JGProgressHUD
 
 class ProfileAndEventsViewController : UIViewController{
     
@@ -31,17 +32,26 @@ class ProfileAndEventsViewController : UIViewController{
         switch segmentedControl.selectedSegmentIndex
         {
         case 0:
-            eventsList = APIWorker.getMySmallEvents()
-            tableView.reloadData()
+            APIWorker.getMySmallEvents(){ result in
+                self.eventsList = result ?? []
+                self.tableView.reloadData()
+            }
         case 1:
-            eventsList = APIWorker.getUpcomingSmallEvents()
-            tableView.reloadData()
+            APIWorker.getUpcomingSmallEvents(){ result in
+                self.eventsList = result ?? []
+                self.tableView.reloadData()
+            }
         case 2:
-            eventsList = APIWorker.getPastSmallEvents()
+            APIWorker.getPastSmallEvents(){ result in
+                self.eventsList = result ?? []
+                self.tableView.reloadData()
+            }
             tableView.reloadData()
         default:
-            eventsList = APIWorker.getMySmallEvents()
-            tableView.reloadData()
+            APIWorker.getMySmallEvents(){result in
+                self.eventsList = result ?? []
+                self.tableView.reloadData()
+            }
         }
     }
     @IBAction func btnAddClicked(_ sender: UIButton)
@@ -62,7 +72,6 @@ class ProfileAndEventsViewController : UIViewController{
     var previousScrollOffset : CGFloat = 0
     
     var eventsList: [SmallEventDTO] = [SmallEventDTO]()
-    var firstLogin : Bool = true
     
     override func viewDidLoad()
     {
@@ -71,23 +80,16 @@ class ProfileAndEventsViewController : UIViewController{
         textName.text = user.name
         if let avatar = user.avatar
         {
-            if let url = URL(string: avatar) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
-            {
-                do{
-                    let data = try Data(contentsOf: url)
-                    profileImg.image = UIImage(data: data)
-                    backImg.image = UIImage(data: data)
-                }
-                catch
-                {
-                    
-                }
-            }
+            self.backImg.loadImage(urlString: avatar, placeholderImage: UIImage(named: "profile-1"))
+            self.profileImg.loadImage(urlString: avatar, placeholderImage: UIImage(named: "profile-1"))
+            self.customizePics()
+
         }
-        
-        customizePics()
-        eventsList = APIWorker.getMySmallEvents()
-        tableView.reloadData()
+        self.customizePics()
+        APIWorker.getMySmallEvents(){ result in
+            self.eventsList =  result ?? []
+            self.tableView.reloadData()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -101,32 +103,14 @@ class ProfileAndEventsViewController : UIViewController{
         if segue.identifier == "cellToEventSegue" ,
             let nextScene = segue.destination as? EventBigController ,
             let indexPath = self.tableView.indexPathForSelectedRow {
-            let selectedEvent = APIWorker.getEventInfo(eventsList[indexPath.row].id!)
-            nextScene.currentEvent = selectedEvent
+            nextScene.currentEventId = eventsList[indexPath.row].id!
         }
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        checkLogin()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
         
-    }
-    
-    private func checkLogin()
-    {
-        if(firstLogin)
-        {
-            if(UserDefaults.standard.string(forKey: defaultsKeys.authType)=="" || UserDefaults.standard.string(forKey: defaultsKeys.authType)==nil)
-            {
-                let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-                self.navigationController?.pushViewController(loginViewController, animated: false)
-                firstLogin = false
-            }
-        }
     }
     
     private func getUserDTO() -> LoginDTO
@@ -300,20 +284,32 @@ extension ProfileAndEventsViewController : UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        
-        
-        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { action, index in
-            let alert = UIAlertController(title: "Alert", message: "Add realization", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+        if(self.segmentedControl.selectedSegmentIndex == 0)
+        {
+            let delete = UITableViewRowAction(style: .destructive, title: "Delete") { action, index in
+                let alert = UIAlertController(title: "Alert", message: "Do you really want to delete " + self.eventsList[indexPath.row].name!, preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.default, handler: {alertAction in
+                    let hud = JGProgressHUD(style: .dark)
+                    hud.show(in: self.view)
+                    APIWorker.deleteEvent(self.eventsList[indexPath.row].id!, completion: {result in
+                        hud.dismiss(animated: true)
+                    })
+                }))
+                self.present(alert, animated: true, completion: nil)
+            }
+            delete.backgroundColor = UIColor.red
+            
+            let edit = UITableViewRowAction(style: .normal, title: "Edit") { action, index in
+                let kek = EditEventViewController()
+                kek.currentEventId = self.eventsList[indexPath.row].id!
+                self.navigationController?.pushViewController(kek, animated: true)
+            }
+            edit.backgroundColor = UIColor.blue
+            
+            return [edit, delete]
         }
-        delete.backgroundColor = UIColor.red
         
-        let edit = UITableViewRowAction(style: .normal, title: "Edit") { action, index in
-        }
-        edit.backgroundColor = UIColor.blue
-        
-        return [edit, delete]
+        return []
     }
 }
 

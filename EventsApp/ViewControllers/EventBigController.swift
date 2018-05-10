@@ -8,10 +8,13 @@
 
 import Foundation
 import UIKit
+import KFSwiftImageLoader
+import JGProgressHUD
 
 class EventBigController : UIViewController
 {
     var currentEvent : BigEventDTO = BigEventDTO()
+    var currentEventId : Int64 = -1
     
     @IBOutlet weak var imgEvent: UIImageView!
     @IBOutlet weak var txtName: UILabel!
@@ -33,53 +36,49 @@ class EventBigController : UIViewController
     }
     @IBOutlet weak var scrollViewHeightConstraint: NSLayoutConstraint!
     
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        txtName.text = currentEvent.name!
-        txtTime.text = formatDate(currentEvent.date!)
-        txtDuration.text = String(Int(currentEvent.duration!/1000/60)) + " hours"
-        btnParticipants.setTitle( currentEvent.participants!==1 ? String(describing: currentEvent.participants!) + " person" : String(describing: currentEvent.participants!) + " people", for: .normal)
-        txtGroup.text = currentEvent.groupName ?? "public"
-        txtDescription.text = currentEvent.description!
-        txtName.sizeToFit()
-        btnParticipants.sizeToFit()
-        txtDescription.sizeToFit()
-        if let avatar = currentEvent.pathToThePicture
-        {
-            if let url = URL(string: "http://13.74.42.169:8080/events/get_picture?path=" + avatar)
+    override func viewDidAppear(_ animated: Bool) {
+        //super.viewDidAppear(animated)
+        APIWorker.getEventInfo(currentEventId){ result in
+            if(result != nil)
             {
-                do{
-                    let data = try Data(contentsOf: url)
-                    imgEvent.image = UIImage(data: data)
-                }
-                catch
+                self.currentEvent = result!
+                self.txtName.text = self.currentEvent.name!
+                self.txtTime.text = self.formatDate(self.currentEvent.date!)
+                self.txtDuration.text = String(Int(self.currentEvent.duration!/1000/60)) + " hours"
+                self.btnParticipants.setTitle( self.currentEvent.participants!==1 ? String(describing: self.currentEvent.participants!) + " person" : String(describing: self.currentEvent.participants!) + " people", for: .normal)
+                self.txtGroup.text = self.currentEvent.groupName ?? "public"
+                self.txtDescription.text = self.currentEvent.description!
+                self.txtName.sizeToFit()
+                self.btnParticipants.sizeToFit()
+                self.txtDescription.sizeToFit()
+                if let image = self.currentEvent.pathToThePicture
                 {
-                    
+                    self.imgEvent.loadImage(urlString: "http://188.134.92.52:1725/events/get_picture?path=" + image, placeholderImage: UIImage(named: "profile-1"))
                 }
+                if(self.currentEvent.ownerId != Int64(UserDefaults.standard.string(forKey: defaultsKeys.serverId)!))
+                {
+                    if(!self.currentEvent.isAccepted!)
+                    {
+                        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Go!", style: .plain, target: self, action: #selector(EventBigController.goTapped(_:)))
+                    }
+                    else{
+                        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Leave", style: .plain, target: self, action: #selector(EventBigController.leaveTapped(_:)))
+                    }
+                }
+                else{
+                    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(EventBigController.editTapped(_:)))
+                }
+                
             }
-        }
+        };
+        var temp = ""
+        temp += "kek"
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
         self.navigationItem.title = "Event"
-        if(currentEvent.ownerId != Int64(UserDefaults.standard.string(forKey: defaultsKeys.serverId)!))
-        {
-            if(!currentEvent.isAccepted!)
-            {
-                self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Go!", style: .plain, target: self, action: #selector(EventBigController.goTapped(_:)))
-            }
-            else{
-                self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Leave", style: .plain, target: self, action: #selector(EventBigController.leaveTapped(_:)))
-            }
-        }
-        else{
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(EventBigController.editTapped(_:)))
-        }
-        
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -91,8 +90,7 @@ class EventBigController : UIViewController
         if (segue.identifier == "showParticipants")
         {
             let nextScene = segue.destination as? ParticipantsController
-            let participants = APIWorker.getEventParticipants(currentEvent.id!)
-            nextScene?.peopleList = participants
+            nextScene!.eventId = currentEvent.id!
         }
     }
     
@@ -106,27 +104,27 @@ class EventBigController : UIViewController
     }
     @objc func editTapped(_ sender: UIBarButtonItem)
     {
-        let kek = EditEventViewController() as! EditEventViewController
+        let kek = EditEventViewController()
         kek.currentEvent = currentEvent
         self.navigationController?.pushViewController(kek, animated: true)
     }
     @objc func goTapped(_ sender: UIBarButtonItem)
     {
+        let hud = JGProgressHUD(style: .dark)
+        hud.show(in: self.view)
         if(APIWorker.participateInEvent(currentEvent.id!))
         {
-            let alert = UIAlertController(title: "", message: "You have become a participant!", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "Ok, thanks", style: UIAlertActionStyle.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+            hud.dismiss(animated: true)
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Leave", style: .plain, target: self, action: #selector(EventBigController.leaveTapped(_:)))
         }
     }
     @objc func leaveTapped(_ sender: UIBarButtonItem)
     {
+        let hud = JGProgressHUD(style: .dark)
+        hud.show(in: self.view)
         if(APIWorker.deleteParticipantOfEvent(currentEvent.id!))
         {
-            let alert = UIAlertController(title: "", message: "You have left the event :(", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "Yeah, I know", style: UIAlertActionStyle.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+            hud.dismiss(animated: true)
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Go!", style: .plain, target: self, action: #selector(EventBigController.goTapped(_:)))
         }
     }

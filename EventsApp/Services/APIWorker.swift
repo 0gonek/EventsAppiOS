@@ -7,7 +7,7 @@ import Alamofire_Synchronous
 import UIKit
 final class APIWorker {
     
-    private static let connectionUrl = "http://13.74.42.169:8080/"
+    private static let connectionUrl = "http://188.134.92.52:1725/"
     class func authorize( success: @escaping ([String : String]) -> (), onError: @escaping (VKError) -> ())
     {
         VK.sessions.default.logIn(
@@ -24,12 +24,8 @@ final class APIWorker {
         return (vkDelegateReference as! VKDelegate).silentLogin()
     }
     
-    class func getMySmallEvents() -> [SmallEventDTO]
+    class func getMySmallEvents(completion: @escaping ([SmallEventDTO]?) -> Void)
     {
-        if(UserDefaults.standard.string(forKey: defaultsKeys.authType) == "" || UserDefaults.standard.string(forKey: defaultsKeys.authType) == nil)
-        {
-            return [SmallEventDTO]()
-        }
         let responce = Just.get(connectionUrl+"events/get_profile_events", params:
             ["type":0,
              "id": Int64(UserDefaults.standard.string(forKey: defaultsKeys.serverId)!)!,
@@ -37,18 +33,15 @@ final class APIWorker {
             ])
         if let temp = Mapper<SmallEventsDTO>().map(JSONObject: responce.json)
         {
-            if(temp.eventsArray != nil)
-            {
-                return temp.eventsArray!
-            }
+            completion(temp.eventsArray)
         }
-        
-        return [SmallEventDTO]()
-        
+        else{
+            completion(nil)
+        }
     }
     
-    class func getUpcomingSmallEvents() -> [SmallEventDTO]{
-        
+    class func getUpcomingSmallEvents(completion: @escaping ([SmallEventDTO]?) -> Void)
+    {
         let responce = Just.get(connectionUrl+"events/get_profile_events", params:
             ["type":1,
              "id": Int64(UserDefaults.standard.string(forKey: defaultsKeys.serverId)!)!,
@@ -56,14 +49,15 @@ final class APIWorker {
             ])
         if let temp = Mapper<SmallEventsDTO>().map(JSONObject: responce.json)
         {
-            return temp.eventsArray!
+            completion(temp.eventsArray)
         }
         else {
-            return [SmallEventDTO]()
+            completion(nil)
         }
     }
     
-    class func getPastSmallEvents() -> [SmallEventDTO]{
+    class func getPastSmallEvents(completion: @escaping ([SmallEventDTO]?) -> Void)
+    {
         let responce = Just.get(connectionUrl+"events/get_profile_events", params:
             ["type":2,
              "id": Int64(UserDefaults.standard.string(forKey: defaultsKeys.serverId)!)!,
@@ -71,19 +65,35 @@ final class APIWorker {
             ])
         if let temp = Mapper<SmallEventsDTO>().map(JSONObject: responce.json)
         {
-            return temp.eventsArray!
+            completion(temp.eventsArray)
         }
         else {
-            return [SmallEventDTO]()
+            completion(nil)
         }
     }
     
-    public class func getEventInfo(_ id: Int64) -> BigEventDTO
+    public class func getEventInfo(_ id: Int64, completion: @escaping (BigEventDTO?) -> Void)
     {
         if(UserDefaults.standard.string(forKey: defaultsKeys.authType) == "" || UserDefaults.standard.string(forKey: defaultsKeys.authType) == nil)
         {
-            return BigEventDTO()
+            completion(nil)
         }
+        let responce = Just.get(connectionUrl+"events/get", params:
+            ["event_id":id,
+             "id": Int64(UserDefaults.standard.string(forKey: defaultsKeys.serverId)!)!,
+             "token": UserDefaults.standard.string(forKey: defaultsKeys.token)!
+            ])
+        if let temp = Mapper<BigEventDTO>().map(JSONObject: responce.json)
+        {
+            completion(temp)
+        }
+        else {
+            completion(nil)
+        }
+    }
+    
+    public class func getEventInfoSync(_ id: Int64) -> BigEventDTO?
+    {
         let responce = Just.get(connectionUrl+"events/get", params:
             ["event_id":id,
              "id": Int64(UserDefaults.standard.string(forKey: defaultsKeys.serverId)!)!,
@@ -94,10 +104,10 @@ final class APIWorker {
             return temp
         }
         else {
-            return BigEventDTO()
+            return nil
         }
     }
-    public class func getEventParticipants(_ id : Int64) -> [LoginDTO]
+    public class func getEventParticipants(_ id : Int64, completion: @escaping ([LoginDTO]?) -> Void)
     {
         let responce = Just.get(connectionUrl+"events/get_participants", params:
             ["event_id":id,
@@ -107,17 +117,15 @@ final class APIWorker {
         
         if let temp = Mapper<LoginsDTO>().map(JSONObject: responce.json)
         {
-            return temp.loginsArray!
+            completion(temp.loginsArray)
         }
         else
         {
-            return [LoginDTO]()
+            completion(nil)
         }
     }
     
-    
-    
-    public class func getMapEvents(minLat: Double,minLon: Double, maxLat:Double, maxLon: Double) -> [MapEventDTO]
+    public class func getMapEvents(minLat: Double,minLon: Double, maxLat:Double, maxLon: Double, completion: @escaping ([MapEventDTO]?) -> Void)
     {
         if(UserDefaults.standard.string(forKey: defaultsKeys.authType) == "" || UserDefaults.standard.string(forKey: defaultsKeys.authType) == nil)
         {
@@ -130,11 +138,11 @@ final class APIWorker {
                     ])
             if let temp = Mapper<MapEventsDTO>().map(JSONObject: responce.json)
             {
-                return temp.eventsList!
+                completion(temp.eventsList)
             }
             else
             {
-                return [MapEventDTO]()
+                completion(nil)
             }
         }
         else
@@ -150,15 +158,12 @@ final class APIWorker {
                     ])
             if let temp = Mapper<MapEventsDTO>().map(JSONObject: responce.json)
             {
-                if(temp.eventsList != nil)
-                {
-                    return temp.eventsList!
-                }
-                
+                completion(temp.eventsList)
             }
-            
-            return [MapEventDTO]()
-            
+            else
+            {
+                completion(nil)
+            }
         }
     }
     
@@ -199,7 +204,7 @@ final class APIWorker {
         }
     }
     
-    public class func addEvent(_ event : NewEventDTO) -> Int64
+    public class func addEvent(_ event : NewEventDTO, completion: @escaping (Int64?) -> Void)
     {
         event.groupId = 0
         let jsonstring = event.toJSON()
@@ -210,11 +215,10 @@ final class APIWorker {
         
         let response = Alamofire.request(url, method: .post, parameters: jsonstring, encoding: JSONEncoding.default, headers: headers).responseJSON()
         
-        if let json = response.result.value {
-            return json as! Int64
+        if let json = (response.result.value as! Int64?){
+            completion(json)
         }
-        
-        return -1
+        return completion(-1)
     }
     
     public class func changeEvent(_ event: ChangeEventDTO) -> Bool
@@ -226,16 +230,131 @@ final class APIWorker {
             ]
         
         let response = Alamofire.request(url, method: .post, parameters: jsonstring, encoding: JSONEncoding.default, headers: headers).responseJSON()
-        var er = response.result
-        var t = er.error
         
         if let json = response.result.value {
             return json as! Bool
-            print(er.error)
         }
         
         return false
     }
+    
+    public class func deleteEvent(_ eventId: Int64, completion: @escaping (Bool) -> Void){
+        let responce = Just.get(connectionUrl+"events/delete", params:
+            [
+                "id": Int64(UserDefaults.standard.string(forKey: defaultsKeys.serverId)!)!,
+                "token": UserDefaults.standard.string(forKey: defaultsKeys.token)!,
+                "event_id": eventId
+            ])
+        if(responce.ok)
+        {
+            completion(responce.text!.compare("true").rawValue == 0)
+        }
+        else
+        {
+            completion(false)
+        }
+    }
+    
+    public class func getMyGroups(completion: @escaping ([SmallGroupDTO]?) -> Void){
+        let responce = Just.get(connectionUrl+"/groups/get_own", params:
+            [
+                "id": Int64(UserDefaults.standard.string(forKey: defaultsKeys.serverId)!)!,
+                "token": UserDefaults.standard.string(forKey: defaultsKeys.token)!,
+            ])
+        if let temp = Mapper<SmallGroupsDTO>().map(JSONObject: responce.json)
+        {
+            completion(temp.groupsArray)
+        }
+        else{
+            completion(nil)
+        }
+    }
+    
+    public class func searchGroups(query: String, offset: Int, quantity: Int, completion: @escaping ([SmallGroupDTO]?) -> Void){
+        let responce = Just.get(connectionUrl+"/groups/search", params:
+            [
+                "id": Int64(UserDefaults.standard.string(forKey: defaultsKeys.serverId)!)!,
+                "token": UserDefaults.standard.string(forKey: defaultsKeys.token)!,
+                "key_word": query,
+                "offset": offset,
+                "quantity": quantity
+                ])
+        if let temp = Mapper<SmallGroupsDTO>().map(JSONObject: responce.json)
+        {
+            completion(temp.groupsArray)
+        }
+        else{
+            completion(nil)
+        }
+    }
+    
+    public class func participateInGroup(groupId: Int64, completion: @escaping (Bool?) -> Void){
+        let responce = Just.get(connectionUrl+"/groups/new_participant", params:
+            [
+                "id": Int64(UserDefaults.standard.string(forKey: defaultsKeys.serverId)!)!,
+                "token": UserDefaults.standard.string(forKey: defaultsKeys.token)!,
+                "group_id": groupId
+            ])
+        if(responce.ok)
+        {
+            completion(responce.text!.compare("true").rawValue == 0)
+        }
+        else
+        {
+            completion(false)
+        }
+    }
+    
+    public class func leaveGroup(groupId: Int64, completion: @escaping (Bool?) -> Void){
+        let responce = Just.get(connectionUrl+"/groups/delete_participant", params:
+            [
+                "id": Int64(UserDefaults.standard.string(forKey: defaultsKeys.serverId)!)!,
+                "participant_id": Int64(UserDefaults.standard.string(forKey: defaultsKeys.serverId)!)!,
+                "token": UserDefaults.standard.string(forKey: defaultsKeys.token)!,
+                "group_id": groupId
+            ])
+        if(responce.ok)
+        {
+            completion(responce.text!.compare("true").rawValue == 0)
+        }
+        else
+        {
+            completion(false)
+        }
+    }
+    
+    public class func getGroupInfo(groupId: Int64, completion: @escaping (GroupDTO?) -> Void){
+        let responce = Just.get(connectionUrl+"/groups/get", params:
+            [
+                "id": Int64(UserDefaults.standard.string(forKey: defaultsKeys.serverId)!)!,
+                "token": UserDefaults.standard.string(forKey: defaultsKeys.token)!,
+                "group_id": groupId
+            ])
+        if let temp = Mapper<GroupDTO>().map(JSONObject: responce.json)
+        {
+            completion(temp)
+        }
+        else{
+            completion(nil)
+        }
+    }
+    
+    public class func getGroupParticipants(groupId: Int64, completion: @escaping ([LoginDTO]?) -> Void){
+        let responce = Just.get(connectionUrl+"groups/get_participants", params:
+            ["group_id":groupId,
+             "id": Int64(UserDefaults.standard.string(forKey: defaultsKeys.serverId)!)!,
+             "token": UserDefaults.standard.string(forKey: defaultsKeys.token)!
+            ])
+        if let temp = Mapper<LoginsDTO>().map(JSONObject: responce.json)
+        {
+            completion(temp.loginsArray)
+        }
+        else
+        {
+            completion(nil)
+        }
+    }
+    
     private func nullToNil(value : AnyObject?) -> AnyObject? {
         if value is NSNull {
             return nil

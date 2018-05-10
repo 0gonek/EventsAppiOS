@@ -22,8 +22,8 @@ struct defaultsKeys {
 
 final class VKDelegate: SwiftyVKDelegate {
     
-    let scopes: Scopes = [.offline]
-    let connectionUrl = "http://13.74.42.169:8080/users/loginvk"
+    let scopes: Scopes = [.offline, .photos]
+    let connectionUrl = "http://188.134.92.52:1725/users/loginvk"
     public static var user: LoginDTO? = nil
     
     func vkNeedsScopes(for sessionId: String) -> Scopes {
@@ -31,16 +31,9 @@ final class VKDelegate: SwiftyVKDelegate {
     }
     
     func vkNeedToPresent(viewController: VKViewController) {
-        /*if let rootController = UIApplication.shared.keyWindow?.rootViewController {
-            rootController.present(viewController, animated: true)
-        }*/
         if let topController = UIApplication.topViewController()
         {
-            /*viewController.modalPresentationStyle = .overCurrentContext
-            let temp = topController.storyboard?.instantiateViewController(withIdentifier: "AuthScreen") as! UIViewController
-            topController.navigationController?.pushViewController(temp, animated: true)*/
             topController.present(viewController, animated: true)
-            //topController.present(viewController, animated:  true, completion: nil)
         }
     }
     
@@ -54,17 +47,23 @@ final class VKDelegate: SwiftyVKDelegate {
             updateDefaults()
             return
         }
-        if let lol = Mapper<LoginDTO>().map(JSONObject: responce.json)
+        let temp = responce.json
+        if let lol = Mapper<LoginDTO>().map(JSONObject: temp)
         {
-            updateDefaults(id: info["user_id"]!, token: info["access_token"]!, authType: "VK", name: lol.name!, avatar: lol.avatar!, serverID: lol.serverId ?? 0)
+            updateDefaults(id: info["user_id"]!,
+                           token: info["access_token"]!,
+                           authType: "VK",
+                           name: lol.name!,
+                           avatar: lol.avatar ?? "",
+                           serverID: lol.serverId ?? 0)
             VKDelegate.user = lol
         }
     }
     
     func vkTokenUpdated(for sessionId: String, info: [String : String]) {
 
-        let responce = Just.post(connectionUrl,
-                                 data: [
+        let responce = Just.get(connectionUrl,
+                                 params: [
                                     "integration_id":info["user_id"]!,
                                     "token":info["access_token"]!])
         if(!responce.ok)
@@ -75,7 +74,12 @@ final class VKDelegate: SwiftyVKDelegate {
         
         if let lol = Mapper<LoginDTO>().map(JSONObject: responce.json)
         {
-            updateDefaults(id: info["user_id"]!, token: info["access_token"]!, authType: "VK", name: lol.name!, avatar: lol.avatar!, serverID: lol.serverId ?? 0)
+            updateDefaults(id: info["user_id"]!,
+                           token: info["access_token"]!,
+                           authType: "VK",
+                           name: lol.name!,
+                           avatar: lol.avatar ?? "",
+                           serverID: lol.serverId ?? 0)
             VKDelegate.user = lol
         }
     }
@@ -87,33 +91,41 @@ final class VKDelegate: SwiftyVKDelegate {
     
     public func silentLogin() -> Bool
     {
-        if(UserDefaults.standard.string(forKey: defaultsKeys.authType)=="")
+        let defaults = UserDefaults.standard
+
+        if(defaults.string(forKey: defaultsKeys.authType)=="" || defaults.string(forKey: defaultsKeys.authType)==nil)
         {
             return false
         }
-        else if(UserDefaults.standard.string(forKey: defaultsKeys.authType)=="VK")
+        else if(defaults.string(forKey: defaultsKeys.authType)=="VK")
         {
-            let responce = Just.post(connectionUrl,
-                                 data: [
-                                    "integration_id":UserDefaults.standard.string(forKey: defaultsKeys.socialId)!,
-                                    "token": UserDefaults.standard.string(forKey: defaultsKeys.token)!])
+            let responce = Just.get(connectionUrl,
+                                 params: [
+                                    "integration_id":defaults.string(forKey: defaultsKeys.socialId)!,
+                                    "token": defaults.string(forKey: defaultsKeys.token)!])
             if(!responce.ok)
             {
+                updateDefaults()
                 return false
             }
             if let lol = Mapper<LoginDTO>().map(JSONObject: responce.json)
             {
-                let defaults = UserDefaults.standard
-                updateDefaults(id: defaults.string(forKey: defaultsKeys.name)!, token: defaults.string(forKey: defaultsKeys.token)!, authType: "VK", name: lol.name!, avatar: lol.avatar!, serverID: lol.serverId ?? 0)
+                updateDefaults(id: defaults.string(forKey: defaultsKeys.socialId)!,
+                               token: defaults.string(forKey: defaultsKeys.token)!,
+                               authType: "VK",
+                               name: lol.name!,
+                               avatar: lol.avatar ?? "",
+                               serverID: lol.serverId ?? 0)
                 VKDelegate.user = lol
             }
-            
+            else {
+                updateDefaults()
+                return false
+            }
         }
         return true
-        
     }
 
-    
     private func updateDefaults(id: String = "", token: String = "",
                                 authType: String = "", name: String = "",
                                 avatar: String = "", serverID: Int64 = -1)

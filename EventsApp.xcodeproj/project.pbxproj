@@ -7,9 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8A124A27202B54B8002E9800 /* GroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A124A26202B54B8002E9800 /* GroupsViewController.swift */; };
+		8A0E41D720A3AA9F006DE3FB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A0E41D620A3AA9F006DE3FB /* MapKit.framework */; };
+		8A0E41D920A3C344006DE3FB /* SmallGroupDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0E41D820A3C344006DE3FB /* SmallGroupDTO.swift */; };
+		8A0E41DB20A3C4DA006DE3FB /* SmallGroupsDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0E41DA20A3C4DA006DE3FB /* SmallGroupsDTO.swift */; };
+		8A0E41DE20A499CA006DE3FB /* GroupDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0E41DD20A499CA006DE3FB /* GroupDTO.swift */; };
+		8A0E41E020A4B3BD006DE3FB /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0E41DF20A4B3BD006DE3FB /* GroupViewController.swift */; };
 		8A1594A020463205009A0688 /* EventBigController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A15949F20463205009A0688 /* EventBigController.swift */; };
 		8A1594A3204726ED009A0688 /* CellToEventSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1594A2204726ED009A0688 /* CellToEventSegue.swift */; };
+		8A173488209F4FFB000ECBAD /* GroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A173487209F4FFB000ECBAD /* GroupsViewController.swift */; };
 		8A193B6C202A62BE00E6E276 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A193B6B202A62BE00E6E276 /* AppDelegate.swift */; };
 		8A193B6E202A62BE00E6E276 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A193B6D202A62BE00E6E276 /* MapViewController.swift */; };
 		8A193B70202A62BE00E6E276 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A193B6F202A62BE00E6E276 /* LoginViewController.swift */; };
@@ -48,9 +53,14 @@
 		12CE2E8CC1D4D03F89DEB684 /* Pods-EventsApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EventsApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-EventsApp/Pods-EventsApp.release.xcconfig"; sourceTree = "<group>"; };
 		2050D2A1E945736434EAC7CF /* Pods_EventsApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EventsApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D90FB167FBD18EB8E0070BB /* Pods-EventsApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EventsApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EventsApp/Pods-EventsApp.debug.xcconfig"; sourceTree = "<group>"; };
-		8A124A26202B54B8002E9800 /* GroupsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsViewController.swift; sourceTree = "<group>"; };
+		8A0E41D620A3AA9F006DE3FB /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		8A0E41D820A3C344006DE3FB /* SmallGroupDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallGroupDTO.swift; sourceTree = "<group>"; };
+		8A0E41DA20A3C4DA006DE3FB /* SmallGroupsDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallGroupsDTO.swift; sourceTree = "<group>"; };
+		8A0E41DD20A499CA006DE3FB /* GroupDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupDTO.swift; sourceTree = "<group>"; };
+		8A0E41DF20A4B3BD006DE3FB /* GroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
 		8A15949F20463205009A0688 /* EventBigController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventBigController.swift; sourceTree = "<group>"; };
 		8A1594A2204726ED009A0688 /* CellToEventSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellToEventSegue.swift; sourceTree = "<group>"; };
+		8A173487209F4FFB000ECBAD /* GroupsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsViewController.swift; sourceTree = "<group>"; };
 		8A193B68202A62BD00E6E276 /* EventsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EventsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A193B6B202A62BE00E6E276 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A193B6D202A62BE00E6E276 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -91,6 +101,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A0E41D720A3AA9F006DE3FB /* MapKit.framework in Frameworks */,
 				FD9961C3C15F38A890BC0C9E /* Pods_EventsApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -146,6 +157,7 @@
 		8A193B80202A647E00E6E276 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8A0E41D620A3AA9F006DE3FB /* MapKit.framework */,
 				2050D2A1E945736434EAC7CF /* Pods_EventsApp.framework */,
 			);
 			name = Frameworks;
@@ -156,7 +168,6 @@
 			children = (
 				8A193B6D202A62BE00E6E276 /* MapViewController.swift */,
 				8A193B6F202A62BE00E6E276 /* LoginViewController.swift */,
-				8A124A26202B54B8002E9800 /* GroupsViewController.swift */,
 				8A3AD526203E443200BAFB9D /* ProfileTabController.swift */,
 				8A3AD528203F78EC00BAFB9D /* ProfileAndEventsController.swift */,
 				8A5FE9C92044F3EE00B87BB2 /* TabBarController.swift */,
@@ -165,6 +176,8 @@
 				8A7BF7D4204A37EF00F175DD /* SingleEventMap.swift */,
 				8A7BF7D6204A52D000F175DD /* EditEventViewController.swift */,
 				8AE90C8E2049AABF00630A0E /* AddEventViewController.swift */,
+				8A173487209F4FFB000ECBAD /* GroupsViewController.swift */,
+				8A0E41DF20A4B3BD006DE3FB /* GroupViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -194,6 +207,9 @@
 				8A5FE9CD2045841500B87BB2 /* BigEventDTO.swift */,
 				8AE90C992049E68B00630A0E /* NewEventDTO.swift */,
 				8A7BF7D8204A532100F175DD /* ChangeEventDTO.swift */,
+				8A0E41D820A3C344006DE3FB /* SmallGroupDTO.swift */,
+				8A0E41DA20A3C4DA006DE3FB /* SmallGroupsDTO.swift */,
+				8A0E41DD20A499CA006DE3FB /* GroupDTO.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -245,7 +261,7 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
-								enabled = 0;
+								enabled = 1;
 							};
 							com.apple.iCloud = {
 								enabled = 1;
@@ -340,7 +356,9 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire-Synchronous/Alamofire_Synchronous.framework",
 				"${BUILT_PRODUCTS_DIR}/DateTimePicker/DateTimePicker.framework",
 				"${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework",
+				"${BUILT_PRODUCTS_DIR}/JGProgressHUD/JGProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/Just/Just.framework",
+				"${BUILT_PRODUCTS_DIR}/KFSwiftImageLoader/KFSwiftImageLoader.framework",
 				"${BUILT_PRODUCTS_DIR}/LocationPicker/LocationPicker.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 			);
@@ -350,7 +368,9 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire_Synchronous.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DateTimePicker.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Eureka.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JGProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Just.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KFSwiftImageLoader.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LocationPicker.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 			);
@@ -366,24 +386,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A0E41E020A4B3BD006DE3FB /* GroupViewController.swift in Sources */,
+				8A173488209F4FFB000ECBAD /* GroupsViewController.swift in Sources */,
 				8A3AD525203E3AA700BAFB9D /* Error.swift in Sources */,
 				8A6AAD8C2047FEE900624479 /* ParticipantsController.swift in Sources */,
 				8A7BF7D9204A532100F175DD /* ChangeEventDTO.swift in Sources */,
 				8A5FE9CE2045841500B87BB2 /* BigEventDTO.swift in Sources */,
 				8A7CD1622040AB8900D4C113 /* LoginDTO.swift in Sources */,
-				8A124A27202B54B8002E9800 /* GroupsViewController.swift in Sources */,
 				8A7BF7D5204A37EF00F175DD /* SingleEventMap.swift in Sources */,
 				8A7BF7D7204A52D000F175DD /* EditEventViewController.swift in Sources */,
 				8AE90C9A2049E68B00630A0E /* NewEventDTO.swift in Sources */,
+				8A0E41D920A3C344006DE3FB /* SmallGroupDTO.swift in Sources */,
 				8AE90C922049CC8000630A0E /* ImagePickerController.swift in Sources */,
 				8A6AAD8E204838A900624479 /* LoginsDTO.swift in Sources */,
 				8A5FE9CA2044F3EE00B87BB2 /* TabBarController.swift in Sources */,
 				8AE90C8F2049AABF00630A0E /* AddEventViewController.swift in Sources */,
+				8A0E41DE20A499CA006DE3FB /* GroupDTO.swift in Sources */,
 				8A193B70202A62BE00E6E276 /* LoginViewController.swift in Sources */,
 				8A3AD5192036316300BAFB9D /* VKDelegate.swift in Sources */,
 				8A3AD529203F78EC00BAFB9D /* ProfileAndEventsController.swift in Sources */,
 				8A5FE9C82042E78100B87BB2 /* Extensions.swift in Sources */,
 				8A193B6C202A62BE00E6E276 /* AppDelegate.swift in Sources */,
+				8A0E41DB20A3C4DA006DE3FB /* SmallGroupsDTO.swift in Sources */,
 				8A7CD1602040A94500D4C113 /* SmallEventDTO.swift in Sources */,
 				8A3AD51B20364D3200BAFB9D /* APIWorker.swift in Sources */,
 				8A79417A2048CB1E0097934E /* MapEventsDTO.swift in Sources */,
@@ -532,13 +556,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = EventsApp/EventsApp.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SV7Q3CBHE8;
 				INFOPLIST_FILE = EventsApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.EventsApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ios.EventsApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -550,13 +576,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = EventsApp/EventsApp.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SV7Q3CBHE8;
 				INFOPLIST_FILE = EventsApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.EventsApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ios.EventsApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

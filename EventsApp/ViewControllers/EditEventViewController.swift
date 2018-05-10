@@ -9,22 +9,37 @@
 import Foundation
 import Eureka
 import LocationPicker
+import CoreLocation
+
 
 class EditEventViewController : FormViewController
 {
     var currentEvent: BigEventDTO?
+    var currentEventId: Int64 = -1
     var chosenLocation : Location?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
+    private func showAlert(msg: String)
+    {
+        let alert = UIAlertController(title: "Error", message: msg, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Ok, i'll fix", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
+        if(currentEventId != -1)
+        {
+            self.currentEvent = APIWorker.getEventInfoSync(currentEventId)
+        }
         
         super.viewDidLoad()
         
@@ -58,18 +73,16 @@ class EditEventViewController : FormViewController
             +++ Section("Start")
             <<< DateRow(){
                 $0.title = "Start Date"
-                $0.value = Date()
+                $0.value = Date(milliseconds: currentEvent!.date!)
                 $0.tag = "startDate"
             }
             <<< TimeRow() {
                 $0.title = "Start time"
-                
                 let formatter = DateFormatter()
                 formatter.timeStyle = .short
                 formatter.locale = Locale(identifier: "ru_RU")
-                
                 $0.dateFormatter = formatter
-                $0.value = NSDate() as Date
+                $0.value = Date(milliseconds: currentEvent!.date!)
                 $0.tag = "startTime"
             }
             
@@ -78,7 +91,7 @@ class EditEventViewController : FormViewController
             
             <<< DateRow(){
                 $0.title = "Finish Date"
-                $0.value = Date()
+                $0.value = Date(milliseconds: currentEvent!.date! + currentEvent!.duration!)
                 $0.tag = "finishDate"
             }
             <<< TimeRow() {
@@ -87,7 +100,7 @@ class EditEventViewController : FormViewController
                 formatter.timeStyle = .short
                 formatter.locale = Locale(identifier: "ru_RU")
                 $0.dateFormatter = formatter
-                $0.value = NSDate() as Date
+                $0.value = Date(milliseconds: currentEvent!.date! + currentEvent!.duration!)
                 $0.tag = "finishTime"
             }
             
@@ -96,18 +109,14 @@ class EditEventViewController : FormViewController
                 btn.title = "Pick location"
                 }
                 .onCellSelection { [weak self] (cell, row) in
-                    
                     let locationPicker = LocationPickerViewController()
                     locationPicker.showCurrentLocationButton = false
                     locationPicker.showCurrentLocationInitially = true
                     locationPicker.useCurrentLocationAsHint = true
                     locationPicker.searchBarPlaceholder = "Search places"
                     locationPicker.mapType = .standard
-                    
                     locationPicker.searchHistoryLabel = "Previously searched"
-                    
                     locationPicker.resultRegionDistance = 400
-                    
                     locationPicker.completion = { location in
                         self?.chosenLocation = location
                         row.title = location?.address
@@ -124,20 +133,29 @@ class EditEventViewController : FormViewController
                     let row3: ImageRow? = self?.form.rowBy(tag: "image")
                     
                     if(!(row2?.isValid)!){
-                        let alert = UIAlertController(title: "Alert", message: "You must fill the red fields", preferredStyle: UIAlertControllerStyle.alert)
-                        alert.addAction(UIAlertAction(title: "Oh, I see... (OK)", style: UIAlertActionStyle.default, handler: nil))
-                        self?.present(alert, animated: true, completion: nil)
+                        self?.showAlert(msg: "Description must be specified")
                         return
                     }
                     if(self?.chosenLocation == nil)
                     {
+                        self?.showAlert(msg: "Location must be selected")
                         return
                     }
                     
                     let valuesDictionary = self?.form.values()
+                    let calendar = Calendar.current
+
+                    let startTime = (valuesDictionary!["startTime"] as! Date)
+                    let finishTime = (valuesDictionary!["finishTime"] as! Date)
                     
-                    let startDate: Int64 = (valuesDictionary!["startDate"] as! Date).millisecondsSince1970
-                    let finishDate: Int64 = (valuesDictionary!["finishDate"] as! Date).millisecondsSince1970
+                    let startHour : Int64 = Int64(calendar.component(.hour, from: startTime))
+                    let startMinutes : Int64 = Int64(calendar.component(.minute, from: startTime))
+                    let finishHour : Int64 = Int64(calendar.component(.hour, from: finishTime))
+                    let finishMinutes : Int64 = Int64(calendar.component(.minute, from: finishTime))
+                    
+                    let startDate: Int64 = (valuesDictionary!["startDate"] as! Date).millisecondsSince1970 + startHour * Int64(360000) + startMinutes * Int64(60000)
+                    let finishDate: Int64 = (valuesDictionary!["finishDate"] as! Date).millisecondsSince1970 + finishHour * Int64(360000) + finishMinutes * Int64(60000)
+                    
                     let imgData : [UInt8]
                     if(row3?.value != nil)
                     {
@@ -150,14 +168,13 @@ class EditEventViewController : FormViewController
                     
                     if(startDate < Date().millisecondsSince1970)
                     {
-                        let alert = UIAlertController(title: "Alert", message: "You can not create event in past, sorry :(", preferredStyle: UIAlertControllerStyle.alert)
-                        alert.addAction(UIAlertAction(title: "Oh, I see... (OK)", style: UIAlertActionStyle.default, handler: nil))
+                        self!.showAlert(msg: "You can not create event in past")
                         return
                     }
+                    
                     if(startDate >= finishDate)
                     {
-                        let alert = UIAlertController(title: "Alert", message: "The finish time can not be more than start time", preferredStyle: UIAlertControllerStyle.alert)
-                        alert.addAction(UIAlertAction(title: "Oh, I see... (OK)", style: UIAlertActionStyle.default, handler: nil))
+                        self!.showAlert(msg: "Finish date can not be later than start date")
                         return
                     }
                     
@@ -172,8 +189,8 @@ class EditEventViewController : FormViewController
                                           description: valuesDictionary!["description"] as? String,
                                           picture: imgData,
                                           id: (self?.currentEvent?.id)!
-                        
                     )
+                    
                     let temp = APIWorker.changeEvent(kek)
                     if(temp)
                     {
